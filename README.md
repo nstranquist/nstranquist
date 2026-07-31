@@ -3,9 +3,6 @@
 Senior Software Engineer building developer platforms, AI infrastructure, and
 full-stack products.
 
-At Bayer Crop Science, I built the Backstage internal developer platform from
-greenfield to maturity, serving 1,000+ developers across 30,000+ repositories.
-
 Today I build and operate local-first Go developer infrastructure across a real
 multi-project software estate:
 
