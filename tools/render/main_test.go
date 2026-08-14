@@ -132,8 +132,11 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	if strings.Contains(readme, "Hi, I'm") || strings.Contains(readme, "👋") {
 		t.Error("README should not use the generic profile greeting")
 	}
-	if strings.Contains(readme, "assets/cards/") {
-		t.Error("README should stay a catalog + prose surface, not a card dump")
+	if strings.Contains(readme, "assets/cards/") || strings.Contains(readme, "assets/banner") || strings.Contains(readme, "assets/catalog") {
+		t.Error("README should stay condensed prose, not embed banner, board, or card SVGs")
+	}
+	if strings.Contains(readme, "<img ") {
+		t.Error("README should not embed images on the profile page")
 	}
 	if !strings.Contains(readme, "## Terms") || !strings.Contains(readme, "Fail-closed") {
 		t.Error("README must include a glossary for remaining terms")
