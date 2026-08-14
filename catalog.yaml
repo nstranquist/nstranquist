@@ -6,13 +6,11 @@ identity:
   name: Nico Stranquist
   role: Senior software engineer
   location: St. Louis
-  thesis: Developer platforms, local developer tools, and full-stack products.
+  thesis: Developer platforms, local tools, and full-stack products.
   intro: |
-    I build developer platforms, local developer tools, and full-stack products.
-
-    These are the public products I will stand behind. Each product has a license
-    and a tagged release you can inspect. Private work and unfinished projects
-    stay off this page.
+    I build developer platforms, local tools, and full-stack products. The
+    projects below are public, licensed, and tagged. Private and unfinished
+    work is not listed here.
   github: https://github.com/nstranquist
   linkedin: https://linkedin.com/in/nstranquist
 featured:
@@ -25,7 +23,7 @@ featured:
     language: Go
     lane: docs search
     proof: v0.5.0
-    summary: Search vendor and project docs on your machine.
+    summary: Copy vendor and project docs to Markdown and search them locally.
     detail: >-
       Copies vendor and project docs into Markdown, indexes them with SQLite FTS5,
       and searches them locally. Quality is measured: the public BM25 sample
@@ -43,7 +41,7 @@ featured:
     language: Go
     lane: software catalog
     proof: v0.1.1
-    summary: A local engine for software catalogs.
+    summary: Index repos and services, then search them and check for drift.
     detail: >-
       Plugins, typed records, full-text and relationship search, and a drift
       check that fails when the catalog and the source files disagree. The
@@ -58,7 +56,7 @@ featured:
     language: TypeScript
     lane: social app
     proof: v0.1.0
-    summary: A realtime social network on Convex.
+    summary: "Realtime social app on Convex: friends, feed, comments, and messages."
     detail: >-
       Accounts, a friend graph, a feed with friends-or-public visibility,
       comments, notifications, and messages. Updates live through Convex
@@ -72,7 +70,7 @@ featured:
     language: Go
     lane: agent tooling
     proof: v0.3.2
-    summary: Local records of what an AI agent did.
+    summary: Record what an AI agent did, saw, and was allowed to call.
     detail: >-
       Trace what an agent did, what it saw, what it was allowed to call, and
       what was proven. Every answer is saved as a local file (a receipt).
@@ -87,7 +85,7 @@ featured:
     language: Swift
     lane: macOS app
     proof: v0.2.0
-    summary: A native menu-bar organizer for macOS.
+    summary: Hide and reveal macOS menu-bar items. Works on your Mac only.
     detail: >-
       Visible, hidden, and always-hidden regions, notch-safe overflow, and a
       searchable reveal panel. It stays on your Mac: no account, no network
@@ -101,7 +99,7 @@ featured:
     language: Go
     lane: job search
     proof: v0.9.0
-    summary: An offline job-search and resume CLI.
+    summary: Search jobs and build resumes offline. Public repo uses example data only.
     detail: >-
       Profiles, eligibility rules, claim lists that reject unproven numbers,
       and apply packages a person reviews before sending. The public tree is

@@ -9,14 +9,14 @@ func renderREADME(cat Catalog) string {
 	var b strings.Builder
 	id := cat.Identity
 
-	b.WriteString("# Public catalog\n\n")
-	fmt.Fprintf(&b, "%s — %s, %s.\n\n", id.Name, strings.ToLower(id.Role), id.Location)
+	fmt.Fprintf(&b, "# %s\n\n", id.Name)
+	fmt.Fprintf(&b, "%s in %s.\n\n", id.Role, id.Location)
 	for _, para := range splitParas(id.Intro) {
 		b.WriteString(para + "\n\n")
 	}
 
 	b.WriteString("## Selected work\n\n")
-	b.WriteString("| Product | What it does | Stack |\n| --- | --- | --- |\n")
+	b.WriteString("| Product | What it does | Release |\n| --- | --- | --- |\n")
 	for _, p := range cat.Featured {
 		what := collapseWS(p.Summary)
 		if p.Metric.Value != "" {
@@ -26,25 +26,6 @@ func renderREADME(cat Catalog) string {
 			p.Name, p.URL, what, p.Language, p.License, p.Proof, p.ProofURL)
 	}
 	b.WriteString("\n")
-
-	b.WriteString("## How I work\n\n")
-	for _, p := range cat.Principles {
-		fmt.Fprintf(&b, "- **%s.** %s\n", p.Title, p.Body)
-	}
-	b.WriteString("\n")
-
-	if len(cat.Glossary) > 0 {
-		b.WriteString("## Terms\n\n")
-		b.WriteString("Short definitions for words used above.\n\n")
-		b.WriteString("| Term | Meaning |\n| --- | --- |\n")
-		for _, g := range cat.Glossary {
-			fmt.Fprintf(&b, "| %s | %s |\n", g.Term, g.Meaning)
-		}
-		b.WriteString("\n")
-	}
-
-	b.WriteString("## Toolbox\n\n")
-	b.WriteString(strings.Join(cat.Toolbox, " · ") + "\n\n")
 
 	b.WriteString("## Contact\n\n")
 	fmt.Fprintf(&b, "[LinkedIn](%s)\n\n", id.LinkedIn)

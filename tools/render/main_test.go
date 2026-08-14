@@ -138,8 +138,8 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	if strings.Contains(readme, "<img ") {
 		t.Error("README should not embed images on the profile page")
 	}
-	if !strings.Contains(readme, "## Terms") || !strings.Contains(readme, "Fail-closed") {
-		t.Error("README must include a glossary for remaining terms")
+	if strings.Contains(readme, "## How I work") || strings.Contains(readme, "## Toolbox") {
+		t.Error("README should stay condensed: no How I work or Toolbox section")
 	}
 	for _, phrase := range []string{
 		"inspectable extract",
