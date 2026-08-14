@@ -80,9 +80,9 @@ func renderBanner(cat Catalog, t theme) string {
 
 	fmt.Fprintf(&b, `  <text x="148" y="94" fill="%s" font-family="%s" font-size="30" letter-spacing="1.4">%s</text>`+"\n", t.Ink, serif, xml(strings.ToUpper(cat.Identity.Name)))
 	fmt.Fprintf(&b, `  <text x="148" y="126" fill="%s" font-family="%s" font-size="16">%s</text>`+"\n", t.Muted, sans, xml(cat.Identity.Role))
-	fmt.Fprintf(&b, `  <text x="148" y="154" fill="%s" font-family="%s" font-size="12" letter-spacing="0.6">%s  ·  public catalog  ·  inspectable source</text>`+"\n", t.Signal, mono, xml(cat.Identity.Location))
+	fmt.Fprintf(&b, `  <text x="148" y="154" fill="%s" font-family="%s" font-size="12" letter-spacing="0.6">%s  ·  public catalog  ·  tagged releases</text>`+"\n", t.Signal, mono, xml(cat.Identity.Location))
 
-	chips := []string{"Platforms", "AI infrastructure", "Full-stack"}
+	chips := []string{"Platforms", "Local tools", "Full-stack"}
 	x := 148.0
 	for _, chip := range chips {
 		cw := 7.2*float64(len(chip)) + 26
@@ -135,13 +135,13 @@ func renderCatalogBoard(cat Catalog, t theme) string {
 	h := pad + header + colH + rowH*len(cat.Featured) + 44 + pad
 	var b strings.Builder
 	fmt.Fprintf(&b, `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" height="%d" role="img">`+"\n", w, h, w, h)
-	fmt.Fprintf(&b, `  <title>Public catalog — %d inspectable products</title>`+"\n", len(cat.Featured))
+	fmt.Fprintf(&b, `  <title>Public catalog — %d products</title>`+"\n", len(cat.Featured))
 	fmt.Fprintf(&b, `  <rect width="%d" height="%d" rx="22" fill="%s"/>`+"\n", w, h, t.BG)
 	fmt.Fprintf(&b, `  <rect x="14" y="14" width="%d" height="%d" rx="16" fill="%s" stroke="%s"/>`+"\n", w-28, h-28, t.Panel, t.Line)
 
 	fmt.Fprintf(&b, `  <circle cx="42" cy="48" r="5" fill="%s"/>`+"\n", t.Signal)
 	fmt.Fprintf(&b, `  <text x="58" y="53" fill="%s" font-family="%s" font-size="16" letter-spacing="1.8">PUBLIC CATALOG</text>`+"\n", t.Ink, sans)
-	fmt.Fprintf(&b, `  <text x="836" y="53" text-anchor="end" fill="%s" font-family="%s" font-size="12">%d products  ·  inspectable</text>`+"\n", t.Muted, mono, len(cat.Featured))
+	fmt.Fprintf(&b, `  <text x="836" y="53" text-anchor="end" fill="%s" font-family="%s" font-size="12">%d products  ·  tagged releases</text>`+"\n", t.Muted, mono, len(cat.Featured))
 	fmt.Fprintf(&b, `  <line x1="32" y1="72" x2="848" y2="72" stroke="%s" stroke-width="1"/>`+"\n", t.Line)
 
 	headers := []struct {
@@ -149,10 +149,10 @@ func renderCatalogBoard(cat Catalog, t theme) string {
 		text string
 	}{
 		{36, "PRODUCT"},
-		{300, "LANE"},
+		{300, "KIND"},
 		{478, "STACK"},
 		{612, "LICENSE"},
-		{748, "PROOF"},
+		{748, "RELEASE"},
 	}
 	hy := pad + header + 18
 	for _, col := range headers {
@@ -166,7 +166,7 @@ func renderCatalogBoard(cat Catalog, t theme) string {
 		}
 		ty := y + 32
 		fmt.Fprintf(&b, `  <text x="36" y="%d" fill="%s" font-family="%s" font-size="15">%s</text>`+"\n", ty, t.Ink, sans, xml(p.Name))
-		fmt.Fprintf(&b, `  <text x="36" y="%d" fill="%s" font-family="%s" font-size="10">%s</text>`+"\n", ty+14, t.Faint, mono, xml(p.ID))
+		fmt.Fprintf(&b, `  <text x="36" y="%d" fill="%s" font-family="%s" font-size="10">%s</text>`+"\n", ty+14, t.Faint, mono, xml(p.Repo))
 		fmt.Fprintf(&b, `  <text x="300" y="%d" fill="%s" font-family="%s" font-size="13">%s</text>`+"\n", ty, t.Muted, sans, xml(p.Lane))
 		fmt.Fprintf(&b, `  <text x="478" y="%d" fill="%s" font-family="%s" font-size="13">%s</text>`+"\n", ty, t.Muted, sans, xml(p.Language))
 		fmt.Fprintf(&b, `  <rect x="612" y="%d" width="112" height="22" rx="11" fill="%s" stroke="%s"/>`+"\n", ty-15, t.Chip, t.Line)
@@ -176,7 +176,11 @@ func renderCatalogBoard(cat Catalog, t theme) string {
 
 	fy := h - pad - 16
 	fmt.Fprintf(&b, `  <line x1="32" y1="%d" x2="848" y2="%d" stroke="%s" stroke-width="1"/>`+"\n", fy-18, fy-18, t.Line)
-	fmt.Fprintf(&b, `  <text x="36" y="%d" fill="%s" font-family="%s" font-size="11">boundary — public extracts only  ·  claims fail closed  ·  no invented metrics</text>`+"\n", fy, t.Faint, mono)
+	note := cat.Footnote
+	if note == "" {
+		note = "Public products only. Unproven claims are rejected. No invented numbers."
+	}
+	fmt.Fprintf(&b, `  <text x="36" y="%d" fill="%s" font-family="%s" font-size="11">%s</text>`+"\n", fy, t.Faint, mono, xml(note))
 	b.WriteString("</svg>\n")
 	return b.String()
 }

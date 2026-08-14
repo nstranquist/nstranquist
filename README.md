@@ -2,9 +2,9 @@
 
 Nico Stranquist — senior software engineer, St. Louis.
 
-I build developer platforms, local-first AI infrastructure, and full-stack products that can prove what they claim.
+I build developer platforms, local developer tools, and full-stack products.
 
-This page is the inspectable extract of that practice. Each product has a license, a proof tag, and a claim boundary. Private systems and unpublished extracts stay off this surface.
+These are the public products I will stand behind. Each product has a license and a tagged release you can inspect. Private work and unfinished projects stay off this page.
 
 <p align="center">
   <img src="assets/banner-dark.svg#gh-dark-mode-only" alt="Nico Stranquist — Senior software engineer" width="880" />
@@ -12,15 +12,15 @@ This page is the inspectable extract of that practice. Each product has a licens
 </p>
 
 <p align="center">
-  <img src="assets/catalog-dark.svg#gh-dark-mode-only" alt="Public catalog of inspectable products" width="880" />
-  <img src="assets/catalog-light.svg#gh-light-mode-only" alt="Public catalog of inspectable products" width="880" />
+  <img src="assets/catalog-dark.svg#gh-dark-mode-only" alt="Public catalog of products" width="880" />
+  <img src="assets/catalog-light.svg#gh-light-mode-only" alt="Public catalog of products" width="880" />
 </p>
 
 ## Selected work
 
 ### [docs-puller](https://github.com/nstranquist/docs-puller)
 
-Mirrors vendor and project docs to Markdown, indexes them with SQLite FTS5, and searches them privately. Quality is a product feature: the public BM25 sample reaches 95.8% Hit@1 and 100% Hit@5, and anyone can rerun it against pinned pages.
+Copies vendor and project docs into Markdown, indexes them with SQLite FTS5, and searches them locally. Quality is measured: the public BM25 sample reaches 95.8% Hit@1 and 100% Hit@5, and anyone can rerun it against pinned pages.
 
 `Go` · Apache-2.0 · [v0.5.0](https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0)
 
@@ -28,39 +28,52 @@ Public BM25 sample: **95.8% Hit@1 · 100% Hit@5**
 
 ### [Nicos Catalog](https://github.com/nstranquist/nicos-catalog)
 
-Provider plugins, typed entities, full-text and relationship search, and drift checks that fail closed when the catalog and the source system disagree. The public core excludes personal telemetry, valuation, and host-specific policy.
+Plugins, typed records, full-text and relationship search, and a drift check that fails when the catalog and the source files disagree. The public core leaves out personal telemetry, valuation, and host-only policy.
 
 `Go` · Apache-2.0 · [v0.1.1](https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1)
 
 ### [Openbook](https://github.com/nstranquist/openbook)
 
-Identity, a friend graph, a visibility-scoped feed, comments, notifications, and messages — live-synced through reactive queries. MIT, with a public v0.1.0 release.
+Accounts, a friend graph, a feed with friends-or-public visibility, comments, notifications, and messages. Updates live through Convex queries. MIT, with a public v0.1.0 release.
 
 `TypeScript` · MIT · [v0.1.0](https://github.com/nstranquist/openbook/releases/tag/v0.1.0)
 
 ### [agent-ops](https://github.com/nstranquist/agent-ops)
 
-Trace what an agent did, what it saw, what it was allowed to call, and what was proven. Every answer is a durable local artifact. Nothing phones home, and nothing asks the model to grade itself.
+Trace what an agent did, what it saw, what it was allowed to call, and what was proven. Every answer is saved as a local file (a receipt). Nothing sends data off the machine, and nothing asks the model to score itself.
 
 `Go` · MIT · [v0.3.2](https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2)
 
 ### [Nicos Hidden Bar](https://github.com/nstranquist/nicos-hidden-menubar)
 
-Visible, hidden, and always-hidden lanes, notch-aware overflow, and a searchable reveal panel. Local-first: no account, no network service. Public source release under GPL-3.0.
+Visible, hidden, and always-hidden regions, notch-safe overflow, and a searchable reveal panel. It stays on your Mac: no account, no network service. Public source release under GPL-3.0.
 
 `Swift` · GPL-3.0 · [v0.2.0](https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0)
 
 ### [JobKit](https://github.com/nstranquist/jobkit)
 
-Profiles, eligibility gates, claim allowlists that fail closed, and human-reviewed apply plans. The public tree is synthetic-fixture only — no personal profile or job-application data.
+Profiles, eligibility rules, claim lists that reject unproven numbers, and apply packages a person reviews before sending. The public tree is synthetic-fixture only (example data, not a real resume or job history).
 
 `Go` · MIT · [v0.9.0](https://github.com/nstranquist/jobkit/releases/tag/v0.9.0)
 
 ## How I work
 
-- **Local-first.** The default path works offline. Cloud is optional, not a prerequisite.
-- **Fail-closed.** Catalogs drift-check. Claims need evidence. Ambiguous state does not silently pass.
-- **Proof, not posture.** Public evaluations, green CI, and tagged releases. No invented adoption, customers, or revenue.
+- **Local-first.** The default path works on your computer. A cloud account is not required.
+- **Fail-closed.** If a check cannot prove the result is safe, the tool stops. Missing evidence is treated as a failure.
+- **Proof, not posture.** I publish evaluations, passing CI, and tagged releases. I do not invent users, customers, or revenue.
+
+## Terms
+
+Short definitions for words used above.
+
+| Term | Meaning |
+| --- | --- |
+| Local-first | The tool works on your computer. A cloud account is not required. |
+| Fail-closed | If a check cannot prove the result is safe, the command stops. Missing evidence is treated as a failure. |
+| Drift check | A comparison that fails when the catalog no longer matches the files it describes. |
+| BM25 | A standard keyword search ranker. Hit@1 means the right page ranked first. Hit@5 means it ranked in the top five. |
+| Synthetic fixture | Made-up example data used in tests and screenshots. Not a real resume or job history. |
+| Receipt | A local file that records what happened so you can check it later. |
 
 ## Toolbox
 

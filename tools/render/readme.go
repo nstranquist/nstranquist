@@ -11,14 +11,13 @@ func renderREADME(cat Catalog) string {
 
 	b.WriteString("# Public catalog\n\n")
 	fmt.Fprintf(&b, "%s — %s, %s.\n\n", id.Name, strings.ToLower(id.Role), id.Location)
-	fmt.Fprintf(&b, "I build %s.\n\n", strings.TrimSuffix(uncapitalize(id.Thesis), "."))
-	b.WriteString("This page is the inspectable extract of that practice. ")
-	b.WriteString("Each product has a license, a proof tag, and a claim boundary. ")
-	b.WriteString("Private systems and unpublished extracts stay off this surface.\n\n")
+	for _, para := range splitParas(id.Intro) {
+		b.WriteString(para + "\n\n")
+	}
 
 	b.WriteString(figure("assets/banner-dark.svg", "assets/banner-light.svg", id.Name+" — "+id.Role, 880))
 	b.WriteString("\n")
-	b.WriteString(figure("assets/catalog-dark.svg", "assets/catalog-light.svg", "Public catalog of inspectable products", 880))
+	b.WriteString(figure("assets/catalog-dark.svg", "assets/catalog-light.svg", "Public catalog of products", 880))
 	b.WriteString("\n")
 
 	b.WriteString("## Selected work\n\n")
@@ -40,6 +39,16 @@ func renderREADME(cat Catalog) string {
 		fmt.Fprintf(&b, "- **%s.** %s\n", p.Title, p.Body)
 	}
 	b.WriteString("\n")
+
+	if len(cat.Glossary) > 0 {
+		b.WriteString("## Terms\n\n")
+		b.WriteString("Short definitions for words used above.\n\n")
+		b.WriteString("| Term | Meaning |\n| --- | --- |\n")
+		for _, g := range cat.Glossary {
+			fmt.Fprintf(&b, "| %s | %s |\n", g.Term, g.Meaning)
+		}
+		b.WriteString("\n")
+	}
 
 	b.WriteString("## Toolbox\n\n")
 	b.WriteString(strings.Join(cat.Toolbox, " · ") + "\n\n")
@@ -77,14 +86,20 @@ func figure(dark, light, alt string, width int) string {
 	return b.String()
 }
 
-func uncapitalize(s string) string {
-	s = strings.TrimSpace(s)
-	if s == "" {
-		return s
-	}
-	return strings.ToLower(s[:1]) + s[1:]
-}
-
 func collapseWS(s string) string {
 	return strings.Join(strings.Fields(s), " ")
+}
+
+func splitParas(s string) []string {
+	var out []string
+	for _, para := range strings.Split(s, "\n\n") {
+		para = collapseWS(para)
+		if para != "" {
+			out = append(out, para)
+		}
+	}
+	if len(out) == 0 && collapseWS(s) != "" {
+		return []string{collapseWS(s)}
+	}
+	return out
 }

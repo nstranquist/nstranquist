@@ -135,6 +135,20 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	if strings.Contains(readme, "assets/cards/") {
 		t.Error("README should stay a catalog + prose surface, not a card dump")
 	}
+	if !strings.Contains(readme, "## Terms") || !strings.Contains(readme, "Fail-closed") {
+		t.Error("README must include a glossary for remaining terms")
+	}
+	for _, phrase := range []string{
+		"inspectable extract",
+		"claim boundary",
+		"this surface",
+		"public extracts",
+		"AI infrastructure",
+	} {
+		if strings.Contains(strings.ToLower(readme), phrase) {
+			t.Errorf("README still uses factory phrasing %q", phrase)
+		}
+	}
 }
 
 func TestSVGsAreWellFormedAndThemed(t *testing.T) {
@@ -160,7 +174,7 @@ func TestSVGsAreWellFormedAndThemed(t *testing.T) {
 		t.Fatal("dark and light banners should differ")
 	}
 	for _, p := range cat.Featured {
-		if !strings.Contains(board, p.Name) || !strings.Contains(board, p.ID) || !strings.Contains(board, p.Proof) {
+		if !strings.Contains(board, p.Name) || !strings.Contains(board, p.Repo) || !strings.Contains(board, p.Proof) {
 			t.Errorf("catalog board missing %s", p.ID)
 		}
 	}
