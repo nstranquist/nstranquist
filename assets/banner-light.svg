@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 228" width="880" height="228" role="img">
+  <title>Nico Stranquist — Senior software engineer</title>
+  <rect width="880" height="228" rx="22" fill="#f4f1ea"/>
+  <rect x="18" y="18" width="844" height="192" rx="16" fill="none" stroke="rgba(22,22,20,0.12)" stroke-width="1"/>
+  <g aria-hidden="true">
+    <rect x="40.0" y="70.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="61.0" y="70.0" width="16.0" height="16.0" rx="3.5" fill="rgba(22,22,20,0.08)"/>
+    <rect x="82.0" y="70.0" width="16.0" height="16.0" rx="3.5" fill="rgba(22,22,20,0.08)"/>
+    <rect x="103.0" y="70.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="40.0" y="91.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="61.0" y="91.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="82.0" y="91.0" width="16.0" height="16.0" rx="3.5" fill="rgba(22,22,20,0.08)"/>
+    <rect x="103.0" y="91.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="40.0" y="112.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="61.0" y="112.0" width="16.0" height="16.0" rx="3.5" fill="rgba(22,22,20,0.08)"/>
+    <rect x="82.0" y="112.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="103.0" y="112.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="40.0" y="133.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+    <rect x="61.0" y="133.0" width="16.0" height="16.0" rx="3.5" fill="rgba(22,22,20,0.08)"/>
+    <rect x="82.0" y="133.0" width="16.0" height="16.0" rx="3.5" fill="rgba(22,22,20,0.08)"/>
+    <rect x="103.0" y="133.0" width="16.0" height="16.0" rx="3.5" fill="#3d5fe0"/>
+  </g>
+  <text x="148" y="94" fill="#161614" font-family="'Iowan Old Style', Palatino, 'Times New Roman', serif" font-size="30" letter-spacing="1.4">NICO STRANQUIST</text>
+  <text x="148" y="126" fill="#6f6c64" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="16">Senior software engineer</text>
+  <text x="148" y="154" fill="#3d5fe0" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="0.6">St. Louis  ·  public catalog  ·  inspectable source</text>
+  <rect x="148.0" y="182" width="90.8" height="22" rx="11" fill="#e3ddd2" stroke="rgba(22,22,20,0.12)"/>
+  <text x="161.0" y="197" fill="#6f6c64" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="11">Platforms</text>
+  <rect x="246.8" y="182" width="148.4" height="22" rx="11" fill="#e3ddd2" stroke="rgba(22,22,20,0.12)"/>
+  <text x="259.8" y="197" fill="#6f6c64" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="11">AI infrastructure</text>
+  <rect x="403.2" y="182" width="98.0" height="22" rx="11" fill="#e3ddd2" stroke="rgba(22,22,20,0.12)"/>
+  <text x="416.2" y="197" fill="#6f6c64" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="11">Full-stack</text>
+</svg>
