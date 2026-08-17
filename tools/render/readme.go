@@ -27,9 +27,6 @@ func renderREADME(cat Catalog) string {
 	}
 	b.WriteString("\n")
 
-	b.WriteString("## Contact\n\n")
-	fmt.Fprintf(&b, "[LinkedIn](%s)\n\n", id.LinkedIn)
-
 	b.WriteString("<!-- Generated from catalog.yaml by tools/render. Edit the catalog, then `make render`. -->\n")
 	return b.String()
 }
