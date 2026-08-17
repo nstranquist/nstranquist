@@ -90,6 +90,20 @@ featured:
       Visible, hidden, and always-hidden regions, notch-safe overflow, and a
       searchable reveal panel. It stays on your Mac: no account, no network
       service. Public source release under GPL-3.0.
+  - id: product.nicos-slot-dock
+    name: Nicos Slot Dock
+    repo: nstranquist/nicos-slot-dock
+    url: https://github.com/nstranquist/nicos-slot-dock
+    proof_url: https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.4
+    license: MIT
+    language: Swift
+    lane: macOS app
+    proof: v0.3.4
+    summary: Native launcher strip that works alongside the macOS Dock.
+    detail: >-
+      Custom apps, files, and URLs, plus merge or mirror of the system Dock.
+      It stays on your Mac: no account, no network client, no telemetry.
+      Public source under MIT. There is no downloadable binary yet.
   - id: product.jobkit
     name: JobKit
     repo: nstranquist/jobkit

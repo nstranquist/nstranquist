@@ -13,6 +13,7 @@ var requiredIDs = []string{
 	"product.openbook",
 	"product.agent-ops",
 	"product.nicos-hidden-menubar",
+	"product.nicos-slot-dock",
 	"product.jobkit",
 }
 
