@@ -1,6 +1,6 @@
 # Nico Stranquist
 
-I build developer platforms, local tools, and full-stack products. The projects below are public, licensed, and tagged. Private and unfinished work is not listed here.
+I build developer platforms, local tools, and full-stack products. These are current published projects with licenses and tagged releases.
 
 ## Selected work
 
