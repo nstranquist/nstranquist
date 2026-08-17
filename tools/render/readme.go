@@ -10,7 +10,6 @@ func renderREADME(cat Catalog) string {
 	id := cat.Identity
 
 	fmt.Fprintf(&b, "# %s\n\n", id.Name)
-	fmt.Fprintf(&b, "%s in %s.\n\n", id.Role, id.Location)
 	for _, para := range splitParas(id.Intro) {
 		b.WriteString(para + "\n\n")
 	}
