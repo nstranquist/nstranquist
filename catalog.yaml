@@ -8,9 +8,8 @@ identity:
   location: St. Louis
   thesis: Developer platforms, local tools, and full-stack products.
   intro: |
-    I build developer platforms, local tools, and full-stack products. The
-    projects below are public, licensed, and tagged. Private and unfinished
-    work is not listed here.
+    I build developer platforms, local tools, and full-stack products. These
+    are current published projects with licenses and tagged releases.
   github: https://github.com/nstranquist
   linkedin: https://linkedin.com/in/nstranquist
 featured:
@@ -41,7 +40,7 @@ featured:
     language: Go
     lane: software catalog
     proof: v0.1.1
-    summary: Index repos and services, then search them and check for drift.
+    summary: Typed software catalog with full-text and relationship search, provider plugins, and drift checks.
     detail: >-
       Plugins, typed records, full-text and relationship search, and a drift
       check that fails when the catalog and the source files disagree. The
@@ -94,11 +93,11 @@ featured:
     name: Nicos Slot Dock
     repo: nstranquist/nicos-slot-dock
     url: https://github.com/nstranquist/nicos-slot-dock
-    proof_url: https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.5
+    proof_url: https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6
     license: MIT
     language: Swift
     lane: macOS app
-    proof: v0.3.5
+    proof: v0.3.6
     summary: Native launcher strip that works alongside the macOS Dock.
     detail: >-
       Custom apps, files, and URLs, plus merge or mirror of the system Dock.
