@@ -16,11 +16,11 @@ var requiredIDs = []string{
 	"product.nicos-slot-dock",
 	"product.jobkit",
 	"product.session-pressure",
+	"product.wip-commit",
 }
 
 var moreIDs = []string{
 	"product.keepawake",
-	"product.wip-commit",
 	"product.snapref",
 	"product.ngtm",
 	"product.nicos-flag-eval",

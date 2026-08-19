@@ -21,9 +21,9 @@ featured_ids:
   - product.nicos-slot-dock
   - product.jobkit
   - product.session-pressure
+  - product.wip-commit
 more_ids:
   - product.keepawake
-  - product.wip-commit
   - product.snapref
   - product.ngtm
   - product.nicos-flag-eval
