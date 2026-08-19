@@ -11,7 +11,13 @@ I build developer platforms, local tools, and full-stack products. Each item lin
 - **[Nicos Hidden Bar](https://github.com/nstranquist/nicos-hidden-menubar)** — Hide and reveal macOS menu-bar items. `Swift` · GPL-3.0 · [v0.2.0](https://github.com/nstranquist/nicos-hidden-menubar/tree/v0.2.0)
 - **[Nicos Slot Dock](https://github.com/nstranquist/nicos-slot-dock)** — A native launcher strip next to the macOS Dock. `Swift` · MIT · [v0.3.6](https://github.com/nstranquist/nicos-slot-dock/tree/v0.3.6)
 - **[JobKit](https://github.com/nstranquist/jobkit)** — Offline job-search CLI. Public tree uses example data only. `Go` · MIT · [v0.9.0](https://github.com/nstranquist/jobkit/tree/v0.9.0)
+- **[SessionPressure](https://github.com/nstranquist/session-pressure)** — Local host admission for concurrent coding agents on one Mac. `Go` · Apache-2.0 · [v0.1.0](https://github.com/nstranquist/session-pressure/tree/v0.1.0)
+- **[keepawake](https://github.com/nstranquist/keepawake)** — Keep a closed-lid Mac awake on purpose. `Go` · MIT · [v0.1.3](https://github.com/nstranquist/keepawake/tree/v0.1.3)
 - **[wip-commit](https://github.com/nstranquist/wip-commit)** — Guarded split-commit capture for parallel agents. `Go` · MIT · no public tag
+- **[SnapRef](https://github.com/nstranquist/snapref)** — Local-first browser automation for agents. `Go` · Apache-2.0 · [v0.2.0-rc.1](https://github.com/nstranquist/snapref/tree/v0.2.0-rc.1)
+- **[Nicos GTM](https://github.com/nstranquist/ngtm)** — Local go-to-market toolkit with grounded claims. `Go` · MIT · no public tag
+- **[nicos-flag-eval](https://github.com/nstranquist/nicos-flag-eval)** — Portable feature-flag evaluator. Synthetic catalog only. `Go` · MIT · no public tag
+- **[Nicos Window Switcher](https://github.com/nstranquist/nicos-window-switcher)** — Clean-room macOS window switcher. Public APIs only. `Swift` · MIT · no public tag
 
 Longer write-ups live at [nstranquist.github.io](https://nstranquist.github.io).
 

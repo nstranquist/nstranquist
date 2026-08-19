@@ -1,6 +1,6 @@
 # Public profile policy for github.com/nstranquist.
-# Product facts come only from data/products.json, generated from product-owned
-# passports plus read-only public GitHub observations.
+# Passport facts come from data/products.json. extra_products covers public
+# GitHub extracts that do not yet have a Product Passport snapshot.
 schema_version: 2
 identity:
   name: Nico Stranquist
@@ -21,7 +21,68 @@ featured_ids:
   - product.nicos-hidden-menubar
   - product.nicos-slot-dock
   - product.jobkit
+  - product.session-pressure
+  - product.keepawake
   - product.wip-commit
+  - product.snapref
+  - product.ngtm
+  - product.nicos-flag-eval
+  - product.nicos-window-switcher
+extra_products:
+  product.session-pressure:
+    name: SessionPressure
+    repo: nstranquist/session-pressure
+    url: https://github.com/nstranquist/session-pressure
+    license: Apache-2.0
+    language: Go
+    lane: host admission
+    proof: v0.1.0
+    proof_url: https://github.com/nstranquist/session-pressure/tree/v0.1.0
+    summary: Local host admission for concurrent coding agents on one Mac.
+  product.keepawake:
+    name: keepawake
+    repo: nstranquist/keepawake
+    url: https://github.com/nstranquist/keepawake
+    license: MIT
+    language: Go
+    lane: macOS utility
+    proof: v0.1.3
+    proof_url: https://github.com/nstranquist/keepawake/tree/v0.1.3
+    summary: Keep a closed-lid Mac awake on purpose.
+  product.snapref:
+    name: SnapRef
+    repo: nstranquist/snapref
+    url: https://github.com/nstranquist/snapref
+    license: Apache-2.0
+    language: Go
+    lane: browser automation
+    proof: v0.2.0-rc.1
+    proof_url: https://github.com/nstranquist/snapref/tree/v0.2.0-rc.1
+    summary: Local-first browser automation for agents.
+  product.ngtm:
+    name: Nicos GTM
+    repo: nstranquist/ngtm
+    url: https://github.com/nstranquist/ngtm
+    license: MIT
+    language: Go
+    lane: go-to-market
+    summary: Local go-to-market toolkit with grounded claims.
+  product.nicos-flag-eval:
+    name: nicos-flag-eval
+    repo: nstranquist/nicos-flag-eval
+    url: https://github.com/nstranquist/nicos-flag-eval
+    license: MIT
+    language: Go
+    lane: feature flags
+    summary: Portable feature-flag evaluator. Synthetic catalog only.
+  product.nicos-window-switcher:
+    name: Nicos Window Switcher
+    repo: nstranquist/nicos-window-switcher
+    url: https://github.com/nstranquist/nicos-window-switcher
+    license: MIT
+    language: Swift
+    lane: macOS app
+    summary: Clean-room macOS window switcher. Public APIs only.
 public_copy:
   product.docs-puller:
     summary: Search vendor and project docs on your machine.
@@ -41,6 +102,19 @@ public_copy:
     summary: Offline job-search CLI. Public tree uses example data only.
   product.wip-commit:
     summary: Guarded split-commit capture for parallel agents.
+  product.session-pressure:
+    summary: Local host admission for concurrent coding agents on one Mac.
+  product.keepawake:
+    summary: Keep a closed-lid Mac awake on purpose.
+  product.snapref:
+    summary: Local-first browser automation for agents.
+  product.ngtm:
+    name: Nicos GTM
+    summary: Local go-to-market toolkit with grounded claims.
+  product.nicos-flag-eval:
+    summary: Portable feature-flag evaluator. Synthetic catalog only.
+  product.nicos-window-switcher:
+    summary: Clean-room macOS window switcher. Public APIs only.
 toolbox:
   - Go
   - TypeScript

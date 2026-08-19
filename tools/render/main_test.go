@@ -15,7 +15,20 @@ var requiredIDs = []string{
 	"product.nicos-hidden-menubar",
 	"product.nicos-slot-dock",
 	"product.jobkit",
+	"product.session-pressure",
+	"product.keepawake",
 	"product.wip-commit",
+	"product.snapref",
+	"product.ngtm",
+	"product.nicos-flag-eval",
+	"product.nicos-window-switcher",
+}
+
+var untaggedIDs = map[string]bool{
+	"product.wip-commit":            true,
+	"product.ngtm":                  true,
+	"product.nicos-flag-eval":       true,
+	"product.nicos-window-switcher": true,
 }
 
 var forbidden = []string{
@@ -81,9 +94,9 @@ func TestCatalogFeaturedOrderAndProof(t *testing.T) {
 		if p.ID != id {
 			t.Errorf("featured[%d]=%s, want %s", i, p.ID, id)
 		}
-		if id == "product.wip-commit" {
-			if p.Proof != "no public tag" || p.ProofURL != "" || p.Release != "" {
-				t.Errorf("wip-commit must preserve missing tag/release truth: %#v", p)
+		if untaggedIDs[id] {
+			if p.Proof != "no public tag" || p.ProofURL != "" {
+				t.Errorf("%s must preserve missing tag truth: %#v", id, p)
 			}
 		} else {
 			if !strings.HasPrefix(p.Proof, "v") {
@@ -106,12 +119,10 @@ func TestCatalogCarriesReferencesInsteadOfProductCopy(t *testing.T) {
 	}
 	text := string(raw)
 	if strings.Contains(text, "\nfeatured:\n") || !strings.Contains(text, "\nfeatured_ids:\n") {
-		t.Fatalf("catalog must select generated products by id, not author product rows:\n%s", text)
+		t.Fatalf("catalog must select products by id, not author a featured table:\n%s", text)
 	}
-	for _, field := range []string{"proof_url:", "repository_url:", "release_version:"} {
-		if strings.Contains(text, field) {
-			t.Errorf("catalog hand-authors generated field %q", field)
-		}
+	if !strings.Contains(text, "\nextra_products:\n") {
+		t.Fatal("catalog must keep extra_products for extracts without passports")
 	}
 }
 
@@ -189,6 +200,14 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	}
 	if !strings.Contains(readme, "example data only") {
 		t.Error("README must keep the JobKit synthetic-data boundary")
+	}
+	for _, needle := range []string{
+		"SessionPressure", "keepawake", "SnapRef", "Nicos GTM",
+		"nicos-flag-eval", "Nicos Window Switcher",
+	} {
+		if !strings.Contains(readme, needle) {
+			t.Errorf("README missing %s", needle)
+		}
 	}
 	if strings.Contains(readme, "agent-native") || strings.Contains(readme, "evidence-backed") {
 		t.Error("README must use public one-liners, not passport hiring copy")

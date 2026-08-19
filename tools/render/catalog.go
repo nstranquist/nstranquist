@@ -13,9 +13,10 @@ import (
 type Catalog struct {
 	SchemaVersion int                   `yaml:"schema_version"`
 	Identity      Identity              `yaml:"identity"`
-	FeaturedIDs   []string              `yaml:"featured_ids"`
-	Featured      []Product             `yaml:"-"`
-	PublicCopy    map[string]PublicCopy `yaml:"public_copy"`
+	FeaturedIDs    []string                 `yaml:"featured_ids"`
+	Featured       []Product                `yaml:"-"`
+	ExtraProducts  map[string]ExtraProduct  `yaml:"extra_products"`
+	PublicCopy     map[string]PublicCopy    `yaml:"public_copy"`
 	Toolbox       []string              `yaml:"toolbox"`
 	Principles    []Principle           `yaml:"principles"`
 	Footnote      string                `yaml:"footnote"`
@@ -25,6 +26,20 @@ type Catalog struct {
 type PublicCopy struct {
 	Name    string `yaml:"name"`
 	Summary string `yaml:"summary"`
+}
+
+// ExtraProduct is a public GitHub extract that does not yet have a Product
+// Passport snapshot. Missing tags stay visible.
+type ExtraProduct struct {
+	Name     string `yaml:"name"`
+	Repo     string `yaml:"repo"`
+	URL      string `yaml:"url"`
+	License  string `yaml:"license"`
+	Language string `yaml:"language"`
+	Lane     string `yaml:"lane"`
+	Proof    string `yaml:"proof"`
+	ProofURL string `yaml:"proof_url"`
+	Summary  string `yaml:"summary"`
 }
 
 type Identity struct {
@@ -151,11 +166,15 @@ func loadCatalog(catalogPath, productsPath string) (Catalog, error) {
 		byID[product.ID] = product
 	}
 	for _, id := range cat.FeaturedIDs {
-		product, ok := byID[id]
-		if !ok {
-			return Catalog{}, fmt.Errorf("featured id %s is missing from data/products.json", id)
+		var mapped Product
+		var err error
+		if product, ok := byID[id]; ok {
+			mapped, err = mapProductPassport(product)
+		} else if extra, ok := cat.ExtraProducts[id]; ok {
+			mapped, err = mapExtraProduct(id, extra)
+		} else {
+			return Catalog{}, fmt.Errorf("featured id %s is missing from data/products.json and extra_products", id)
 		}
-		mapped, err := mapProductPassport(product)
 		if err != nil {
 			return Catalog{}, err
 		}
@@ -226,6 +245,29 @@ func mapProductPassport(source productSnapshotRecord) (Product, error) {
 		product.Metric = Metric{Label: source.Presentation.Metric.Label, Value: source.Presentation.Metric.Value}
 	}
 	return product, nil
+}
+
+func mapExtraProduct(id string, extra ExtraProduct) (Product, error) {
+	url := strings.TrimSpace(extra.URL)
+	if url == "" && extra.Repo != "" {
+		url = "https://github.com/" + extra.Repo
+	}
+	proof := strings.TrimSpace(extra.Proof)
+	if proof == "" {
+		proof = "no public tag"
+	}
+	state := "source public"
+	if extra.ProofURL != "" {
+		state += " · tag " + proof
+	} else {
+		state += " · no tag"
+	}
+	return Product{
+		ID: id, Name: extra.Name, Repo: extra.Repo, URL: url,
+		ProofURL: extra.ProofURL, License: extra.License, Language: extra.Language,
+		Lane: extra.Lane, Proof: proof, ActionLabel: "Source", ActionURL: url,
+		PublicState: state, Summary: extra.Summary,
+	}, nil
 }
 
 func (c Catalog) validate() error {
