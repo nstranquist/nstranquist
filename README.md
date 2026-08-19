@@ -1,6 +1,6 @@
 # Nico Stranquist
 
-I build developer platforms, local tools, and full-stack products. Each row below links to a public repository, a verified access path, and its current tag and formal-release state. Missing evidence stays visible.
+I build developer platforms, local tools, and full-stack products. Each row below links to a public repository, a locally verified access path, and its current tag and formal-release state. Missing evidence stays visible.
 
 ## Selected work
 

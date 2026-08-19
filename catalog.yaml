@@ -9,8 +9,8 @@ identity:
   thesis: Developer platforms, local tools, and full-stack products.
   intro: |
     I build developer platforms, local tools, and full-stack products. Each row
-    below links to a public repository, a verified access path, and its current
-    tag and formal-release state. Missing evidence stays visible.
+    below links to a public repository, a locally verified access path, and its
+    current tag and formal-release state. Missing evidence stays visible.
   github: https://github.com/nstranquist
   linkedin: https://linkedin.com/in/nstranquist
 featured_ids:
