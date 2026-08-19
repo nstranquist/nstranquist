@@ -1,0 +1,1095 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-19T00:46:08Z",
+  "source": "nicos-tools catalog Product Passport projection",
+  "products": [
+    {
+      "id": "product.docs-puller",
+      "name": "docs-puller",
+      "slug": "docs-puller",
+      "audience": "Senior AI-infrastructure, retrieval, and developer-platform hiring teams.",
+      "role_relevance": "primary",
+      "license": "Apache-2.0",
+      "ready": true,
+      "presentation": {
+        "summary": "Local-first documentation retrieval with measurable search quality.",
+        "detail": "Mirror documentation to Markdown, index it with SQLite FTS5, and compare deterministic or optional AI-assisted ranking from one Go CLI.",
+        "language": "Go",
+        "lane": "Retrieval and developer tooling",
+        "metric": {
+          "label": "public BM25 sample",
+          "value": "95.8% Hit@1 · 100% Hit@5",
+          "evidence_url": "https://github.com/nstranquist/docs-puller#measured-retrieval"
+        }
+      },
+      "access": {
+        "profile": "go-cli",
+        "primary_action": {
+          "kind": "install",
+          "label": "Install docs-puller",
+          "url": "https://github.com/nstranquist/docs-puller#install"
+        },
+        "repository_url": "https://github.com/nstranquist/docs-puller",
+        "documentation_url": "https://github.com/nstranquist/docs-puller#quick-start",
+        "feedback_url": "https://github.com/nstranquist/docs-puller/issues/new",
+        "module": "github.com/nstranquist/docs-puller",
+        "binary": "docs-puller",
+        "smoke_argv": [
+          "go",
+          "run",
+          ".",
+          "--help"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "measured-retrieval",
+            "statement": "The repository publishes deterministic retrieval evaluation results and the commands that reproduce them.",
+            "evidence_kind": "test",
+            "evidence_url": "https://github.com/nstranquist/docs-puller#measured-retrieval"
+          },
+          {
+            "id": "local-search",
+            "statement": "The CLI can pull, index, and search a local documentation corpus with SQLite FTS5.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/docs-puller#five-minute-smoke"
+          },
+          {
+            "id": "engineering-case-study",
+            "statement": "The public case study documents the architecture, measured results, release discipline, and claim boundaries.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/docs-puller/blob/main/CASE_STUDY.md"
+          }
+        ],
+        "boundaries": [
+          "Optional reranking and embeddings need separately configured model providers.",
+          "Public source, releases, and local evaluation do not prove external adoption."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/docs-puller"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/docs-puller",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/docs-puller#install",
+          "observed_at": "2026-08-19T00:46:08Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "Apache-2.0",
+        "latest_tag": "v0.5.0",
+        "latest_tag_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
+        "latest_release_tag": "v0.5.0",
+        "latest_release_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/docs-puller/actions/runs/32040914535",
+        "observed_at": "2026-08-19T00:46:06Z"
+      },
+      "version": "v0.5.0",
+      "version_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
+      "assets": [
+        {
+          "url": "/products/docs-puller/01-search-results.png",
+          "kind": "screenshot",
+          "alt": "docs-puller web search showing ranked SQLite documentation results",
+          "caption": "A real local FTS5 search for sqlite across 47,924 ingested documents.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "769bd6748709c0a3d272a6467db027dd5084a7ffbcdd53dec7fc1fca85fb3ae6",
+          "bytes": 89798
+        },
+        {
+          "url": "/products/docs-puller/02-landing.png",
+          "kind": "screenshot",
+          "alt": "docs-puller landing page with local corpus counts",
+          "caption": "Empty-state landing. Corpus counts only; no filesystem root.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "266112967bfe50709eac98b9363ef9a26e04ae72fd1e337fcb25b2b3c244094b",
+          "bytes": 38951
+        },
+        {
+          "url": "/products/docs-puller/03-docs-puller.svg",
+          "kind": "logo",
+          "alt": "docs-puller application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "90ccd02bd8f0b561b38d0bdee7a5334346bef067cc5d312e32049cfe9ee448ac",
+          "bytes": 592
+        }
+      ]
+    },
+    {
+      "id": "product.nicos-catalog",
+      "name": "Nicos Catalog",
+      "slug": "nicos-catalog",
+      "audience": "Senior developer-platform, developer-experience, AI-infrastructure, and full-stack hiring teams.",
+      "role_relevance": "primary",
+      "license": "Apache-2.0",
+      "ready": true,
+      "presentation": {
+        "summary": "A typed, local-first software catalog engine for multi-repository systems.",
+        "detail": "Inject host providers, index a synthetic or real catalog, search it with BM25, inspect relationship graphs, and gate public projections without sending catalog data to a hosted service.",
+        "language": "Go",
+        "lane": "Developer platform and catalog infrastructure"
+      },
+      "access": {
+        "profile": "go-cli",
+        "primary_action": {
+          "kind": "install",
+          "label": "Install Nicos Catalog",
+          "url": "https://github.com/nstranquist/nicos-catalog#install"
+        },
+        "repository_url": "https://github.com/nstranquist/nicos-catalog",
+        "documentation_url": "https://github.com/nstranquist/nicos-catalog#five-minute-smoke",
+        "feedback_url": "https://github.com/nstranquist/nicos-catalog/issues/new",
+        "module": "github.com/nstranquist/nicos-catalog",
+        "binary": "nicos-catalog",
+        "smoke_argv": [
+          "go",
+          "run",
+          "./cmd/nicos-catalog",
+          "version"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "host-injected-engine",
+            "statement": "The catalog engine accepts host-provided filesystem, policy, and projection boundaries.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/nicos-catalog#host-contract"
+          },
+          {
+            "id": "synthetic-smoke",
+            "statement": "The public repository includes a five-minute synthetic-corpus smoke for index, search, graph, and drift behavior.",
+            "evidence_kind": "test",
+            "evidence_url": "https://github.com/nstranquist/nicos-catalog#five-minute-smoke"
+          }
+        ],
+        "boundaries": [
+          "The public engine excludes private operator telemetry, valuation data, and personal catalog records.",
+          "A public source tag is separate from a formal GitHub Release and from external adoption."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/nicos-catalog"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-catalog",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.2.0",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-catalog#install",
+          "observed_at": "2026-08-19T00:46:10Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "Apache-2.0",
+        "latest_tag": "v0.2.0",
+        "latest_tag_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.2.0",
+        "latest_release_tag": "v0.1.1",
+        "latest_release_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/nicos-catalog/actions/runs/32004974313",
+        "observed_at": "2026-08-19T00:46:06Z"
+      },
+      "version": "v0.2.0",
+      "version_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "url": "/products/nicos-catalog/01-catalog-engine.png",
+          "kind": "screenshot",
+          "alt": "Nicos Catalog running inside Catalog Gallery as an independent synthetic host",
+          "caption": "The public engine proof exercises provider injection, deterministic BM25 search, typed graphs, drift checks, and the closed projection.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "2a5cc1f66f3f532f44bf065aabf6da5b1ba617f08cf28d495a8531956fc3c4ff",
+          "bytes": 507628
+        },
+        {
+          "url": "/products/nicos-catalog/02-demo-cli.png",
+          "kind": "screenshot",
+          "alt": "nicos-catalog demo, reindex, and clean drift on the synthetic corpus",
+          "caption": "Terminal walk of the public demo corpus.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "52d278e9dad2f952fb4e783d48094963bc632abc7047b5d9c37cade017e1b525",
+          "bytes": 39477
+        },
+        {
+          "url": "/products/nicos-catalog/03-nicos-catalog.svg",
+          "kind": "logo",
+          "alt": "Nicos Catalog application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "09b1cbeeb1f148de736143fbba0e096f64a784fc9da5d734734540b4f17ea368",
+          "bytes": 575
+        }
+      ]
+    },
+    {
+      "id": "product.openbook",
+      "name": "Openbook (realtime social network)",
+      "slug": "openbook",
+      "audience": "Senior full-stack, realtime-product, and platform-engineering hiring teams.",
+      "role_relevance": "primary",
+      "license": "MIT",
+      "ready": true,
+      "presentation": {
+        "summary": "A fully local realtime social-network proof on a self-hosted Convex stack.",
+        "detail": "Exercise profiles, friendship, audience-scoped feeds, reactions, comments, notifications, direct messages, unread accounting, and indexed people search in one tested product.",
+        "language": "TypeScript",
+        "lane": "Realtime full-stack product engineering"
+      },
+      "access": {
+        "profile": "web-app",
+        "primary_action": {
+          "kind": "try",
+          "label": "Run Openbook locally",
+          "url": "https://github.com/nstranquist/openbook#quick-start-fully-local-no-convex-account"
+        },
+        "repository_url": "https://github.com/nstranquist/openbook",
+        "documentation_url": "https://github.com/nstranquist/openbook#features",
+        "feedback_url": "https://github.com/nstranquist/openbook/issues/new",
+        "smoke_argv": [
+          "pnpm",
+          "build"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "local-realtime-stack",
+            "statement": "The documented quick start runs the web product and its realtime backend without a Convex cloud account.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/openbook#quick-start-fully-local-no-convex-account"
+          },
+          {
+            "id": "publication-gate",
+            "statement": "The repository defines one publication verification command for type checks, tests, build, license review, and secret scanning.",
+            "evidence_kind": "test",
+            "evidence_url": "https://github.com/nstranquist/openbook#verification-all-green-as-of-2026-07-13"
+          }
+        ],
+        "boundaries": [
+          "The portfolio does not claim a currently deployed public Openbook service.",
+          "Fixture and local verification do not prove production traffic or external adoption."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/openbook"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/openbook",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
+          "observed_at": "2026-08-19T00:46:06Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/openbook#quick-start-fully-local-no-convex-account",
+          "observed_at": "2026-08-19T00:46:10Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "MIT",
+        "latest_tag": "v0.1.0",
+        "latest_tag_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
+        "latest_release_tag": "v0.1.0",
+        "latest_release_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/openbook/actions/runs/31795982664",
+        "observed_at": "2026-08-19T00:46:06Z"
+      },
+      "version": "v0.1.0",
+      "version_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
+      "assets": [
+        {
+          "url": "/products/openbook/01-realtime-feed.png",
+          "kind": "screenshot",
+          "alt": "Openbook realtime feed with a locally created post",
+          "caption": "The self-hosted Convex feed after a real local signup and post.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "e4595270b7e62907523e9d01c9a919629ca7d1f878ebdf29e1be9cf42b2d016e",
+          "bytes": 57679
+        },
+        {
+          "url": "/products/openbook/02-openbook.svg",
+          "kind": "logo",
+          "alt": "Openbook (realtime social network) application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "6a02e2c04ed6bbab5bc114667539d5452b14ae4348ca925dff2098b0de97f642",
+          "bytes": 594
+        }
+      ]
+    },
+    {
+      "id": "product.agent-ops",
+      "name": "agent-ops",
+      "slug": "agent-ops",
+      "audience": "Senior AI-systems, platform, and developer-tooling hiring teams.",
+      "role_relevance": "primary",
+      "license": "MIT",
+      "ready": true,
+      "presentation": {
+        "summary": "One offline CLI for evidence-backed coding-agent operations.",
+        "detail": "Inspect traces, pack bounded context, enforce MCP policy, verify claims, produce evidence manifests, benchmark reviews, and observe a local agent fleet through typed receipts.",
+        "language": "Go",
+        "lane": "AI systems and agent operations"
+      },
+      "access": {
+        "profile": "go-cli",
+        "primary_action": {
+          "kind": "install",
+          "label": "Install agent-ops",
+          "url": "https://github.com/nstranquist/agent-ops#install"
+        },
+        "repository_url": "https://github.com/nstranquist/agent-ops",
+        "documentation_url": "https://github.com/nstranquist/agent-ops#the-commands",
+        "feedback_url": "https://github.com/nstranquist/agent-ops/issues/new",
+        "module": "github.com/nstranquist/agent-ops",
+        "binary": "agent-ops",
+        "smoke_argv": [
+          "go",
+          "run",
+          "./cmd/agent-ops",
+          "--help"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "seven-surfaces-one-binary",
+            "statement": "One dispatcher exposes trace, context, MCP, claims, evidence, benchmark, and fleet workflows.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/agent-ops#the-commands"
+          },
+          {
+            "id": "bounded-context-receipt",
+            "statement": "Context packing emits a durable receipt that records the selected chunks and token budget.",
+            "evidence_kind": "demo",
+            "evidence_url": "https://github.com/nstranquist/agent-ops#showcase"
+          }
+        ],
+        "boundaries": [
+          "Receipts show what the local tools observed; they do not prove every action an external agent took.",
+          "Public fixtures and screenshots exclude private session content."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/agent-ops"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/agent-ops",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/agent-ops#install",
+          "observed_at": "2026-08-19T00:46:11Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "MIT",
+        "latest_tag": "v0.3.2",
+        "latest_tag_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
+        "latest_release_tag": "v0.3.2",
+        "latest_release_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/agent-ops/actions/runs/31844635304",
+        "observed_at": "2026-08-19T00:46:05Z"
+      },
+      "version": "v0.3.2",
+      "version_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
+      "assets": [
+        {
+          "url": "/products/agent-ops/01-context-pack.png",
+          "kind": "screenshot",
+          "alt": "agent-ops context pack receipt from the checked-in fixture",
+          "caption": "Receipt from testdata/contextpack/chunks.json. 57 of 800 tokens used; all three chunks included.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "5f444f0a6614ab195083c49d4e8a159f15752539ae9a5f34c4e0cbb8d319c7fd",
+          "bytes": 37573
+        }
+      ]
+    },
+    {
+      "id": "product.nicos-hidden-menubar",
+      "name": "Nicos Hidden Bar",
+      "slug": "nicos-hidden-menubar",
+      "audience": "Senior platform and product-engineering teams valuing native macOS, systems integration, and operational quality.",
+      "role_relevance": "supporting",
+      "license": "GPL-3.0",
+      "ready": true,
+      "presentation": {
+        "summary": "A native, local-first macOS menu-bar organizer with transparent diagnostics.",
+        "detail": "Hide infrequently used items behind a native toggle, search and recover them below the menu bar, and validate the visible result across regular and notched displays.",
+        "language": "Swift",
+        "lane": "Native macOS product engineering"
+      },
+      "access": {
+        "profile": "macos-app",
+        "primary_action": {
+          "kind": "source",
+          "label": "Build Nicos Hidden Bar",
+          "url": "https://github.com/nstranquist/nicos-hidden-menubar#install-from-source"
+        },
+        "repository_url": "https://github.com/nstranquist/nicos-hidden-menubar",
+        "documentation_url": "https://github.com/nstranquist/nicos-hidden-menubar#first-run-setup",
+        "feedback_url": "https://github.com/nstranquist/nicos-hidden-menubar/issues/new",
+        "smoke_argv": [
+          "make",
+          "headless-smoke"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "rendered-item-verification",
+            "statement": "The app verifies rendered menu-bar items instead of treating a process request as proof of a visible result.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar#architecture-and-tradeoffs"
+          },
+          {
+            "id": "native-headless-smoke",
+            "statement": "The repository includes a native headless settings smoke and a publication verification gate.",
+            "evidence_kind": "test",
+            "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar#development"
+          }
+        ],
+        "boundaries": [
+          "The public release contains source and no notarized downloadable application binary.",
+          "Optional synthesized item movement stays off until the user enables it."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar#install-from-source",
+          "observed_at": "2026-08-19T00:46:11Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "GPL-3.0",
+        "latest_tag": "v0.2.0",
+        "latest_tag_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
+        "latest_release_tag": "v0.2.0",
+        "latest_release_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/nicos-hidden-menubar/actions/runs/32040912926",
+        "observed_at": "2026-08-19T00:46:05Z"
+      },
+      "version": "v0.2.0",
+      "version_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
+      "assets": [
+        {
+          "url": "/products/nicos-hidden-menubar/01-preferences-window.png",
+          "kind": "screenshot",
+          "alt": "Nicos Hidden Menubar preferences window",
+          "caption": "Privacy-reviewed macOS preferences UI captured by the native headless smoke.",
+          "provenance": "native-headless-smoke-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "febef25462b198138bd92ce5f6df5bc990f50138388cbef1d496edd47a4522e4",
+          "bytes": 204559
+        },
+        {
+          "url": "/products/nicos-hidden-menubar/02-nicos-hidden-menubar.svg",
+          "kind": "logo",
+          "alt": "Nicos Hidden Bar application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "9577ad1eca1e7cb19a41ad566496ea720442d2d7a2fdd4a83256691fb528bcfa",
+          "bytes": 385
+        }
+      ]
+    },
+    {
+      "id": "product.nicos-slot-dock",
+      "name": "Nicos Slot Dock",
+      "slug": "nicos-slot-dock",
+      "audience": "Senior native-product, platform, and developer-tooling hiring teams.",
+      "role_relevance": "supporting",
+      "license": "MIT",
+      "ready": false,
+      "blockers": [
+        {
+          "code": "case_study",
+          "message": "case study is draft"
+        }
+      ],
+      "presentation": {
+        "summary": "A native macOS launcher strip with configurable slots and optional Dock integration.",
+        "detail": "Combine custom applications, files, and URLs with optional system Dock and live running-app state while keeping all product telemetry local.",
+        "language": "Swift",
+        "lane": "Native macOS product engineering"
+      },
+      "access": {
+        "profile": "macos-app",
+        "primary_action": {
+          "kind": "source",
+          "label": "Build Nicos Slot Dock",
+          "url": "https://github.com/nstranquist/nicos-slot-dock#install-from-source"
+        },
+        "repository_url": "https://github.com/nstranquist/nicos-slot-dock",
+        "documentation_url": "https://github.com/nstranquist/nicos-slot-dock#project-documentation",
+        "feedback_url": "https://github.com/nstranquist/nicos-slot-dock/issues/new",
+        "smoke_argv": [
+          "make",
+          "verify"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "configurable-composition",
+            "statement": "The launcher composes custom slots, optional system Dock items, and running applications.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/nicos-slot-dock#how-it-works"
+          },
+          {
+            "id": "publication-gate",
+            "statement": "The repository provides one publish-ready command for its local release checks.",
+            "evidence_kind": "test",
+            "evidence_url": "https://github.com/nstranquist/nicos-slot-dock#project-documentation"
+          }
+        ],
+        "boundaries": [
+          "The public release contains source and no notarized downloadable application binary.",
+          "System Dock integration and local permissions are optional and user-controlled."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/nicos-slot-dock"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-slot-dock",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/nicos-slot-dock#install-from-source",
+          "observed_at": "2026-08-19T00:46:15Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "MIT",
+        "latest_tag": "v0.3.6",
+        "latest_tag_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
+        "latest_release_tag": "v0.3.6",
+        "latest_release_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/nicos-slot-dock/actions/runs/32040453641",
+        "observed_at": "2026-08-19T00:46:05Z"
+      },
+      "version": "v0.3.6",
+      "version_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
+      "assets": [
+        {
+          "url": "/products/nicos-slot-dock/01-dock-strip.png",
+          "kind": "screenshot",
+          "alt": "Nicos Slot Dock strip with Finder, Safari, Terminal, Notes, Calendar, and System Settings",
+          "caption": "Real strip capture using stock macOS apps in Off mode. No personal Dock.",
+          "provenance": "local-stock-app-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "865cb0092c0b202f89b8207ce87c647fb23b826fe87cae9c1770cf63529f1214",
+          "bytes": 154968
+        },
+        {
+          "url": "/products/nicos-slot-dock/02-settings-options.png",
+          "kind": "screenshot",
+          "alt": "Nicos Slot Dock Settings, Options tab, with pin-open enabled and system Dock integration off",
+          "caption": "Real Options pane from the installed app. Launch at login is on in this capture. The product default is off.",
+          "provenance": "local-stock-app-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "24541228f9a797d09556b7bbde27b0d4622a95eab76d8119cfbc610d4c1c986d",
+          "bytes": 156488
+        },
+        {
+          "url": "/products/nicos-slot-dock/03-nicos-slot-dock.svg",
+          "kind": "logo",
+          "alt": "Nicos Slot Dock application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "d4ed7d1e8a111a5ea9c008070afd9eaa9253714d77423b8c774415f228e5cbc9",
+          "bytes": 578
+        }
+      ]
+    },
+    {
+      "id": "product.jobkit",
+      "name": "jobkit",
+      "slug": "jobkit",
+      "audience": "Senior AI-product and developer-tooling hiring teams.",
+      "role_relevance": "supporting",
+      "license": "MIT",
+      "ready": true,
+      "presentation": {
+        "summary": "An offline, agent-native job-search toolkit with explicit evidence and review gates.",
+        "detail": "Turn a trusted profile and job description into eligibility decisions, fit scores, tailored materials, reviewed apply packages, tracking records, and interview drills. Public proof uses synthetic fixtures and never publishes private job-search state.",
+        "language": "Go",
+        "lane": "Career tooling and applied AI workflows"
+      },
+      "access": {
+        "profile": "go-cli",
+        "primary_action": {
+          "kind": "install",
+          "label": "Install JobKit",
+          "url": "https://github.com/nstranquist/jobkit#quick-start"
+        },
+        "repository_url": "https://github.com/nstranquist/jobkit",
+        "documentation_url": "https://github.com/nstranquist/jobkit#user-guide",
+        "feedback_url": "https://github.com/nstranquist/jobkit/issues/new",
+        "module": "github.com/nstranquist/jobkit",
+        "binary": "jobkit",
+        "smoke_argv": [
+          "go",
+          "run",
+          "./cmd/jobkit",
+          "--help"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "deterministic-fit",
+            "statement": "Eligibility rules and fit scoring remain deterministic and explainable before optional model feedback.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/jobkit#design-notes"
+          },
+          {
+            "id": "agent-json-contract",
+            "statement": "Agent-facing commands use stable JSON envelopes and per-run telemetry.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/jobkit#agent-contract"
+          }
+        ],
+        "boundaries": [
+          "Public fixtures are synthetic; personal profiles, job descriptions, and application history remain private.",
+          "Generated application materials require human review before use."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/jobkit"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/jobkit",
+          "observed_at": "2026-08-19T00:46:07Z"
+        },
+        "tagged": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
+          "observed_at": "2026-08-19T00:46:07Z"
+        },
+        "released": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
+          "observed_at": "2026-08-19T00:46:07Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/jobkit#quick-start",
+          "observed_at": "2026-08-19T00:46:20Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "MIT",
+        "latest_tag": "v0.9.0",
+        "latest_tag_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
+        "latest_release_tag": "v0.9.0",
+        "latest_release_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/jobkit/actions/runs/31976701959",
+        "observed_at": "2026-08-19T00:46:07Z"
+      },
+      "version": "v0.9.0",
+      "version_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
+      "assets": [
+        {
+          "url": "/products/jobkit/01-tailored-resume.png",
+          "kind": "screenshot",
+          "alt": "JobKit generated ATS-safe tailored resume",
+          "caption": "A real HTML resume generated from JobKit's fictional example profile and job description.",
+          "provenance": "local-synthetic-fixture-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "fb35bb9d77ba58ace7b5d8e4aca92246a76e7e16e62ab368e30211e62b476dca",
+          "bytes": 140579
+        },
+        {
+          "url": "/products/jobkit/02-user-guide.png",
+          "kind": "screenshot",
+          "alt": "JobKit user guide",
+          "caption": "The single-file local user guide at 1440x900.",
+          "provenance": "local-documentation-capture",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "ca2c8325e300f3f73c168d942527bda27d0c45382e49eae0e2d38a3cbba95758",
+          "bytes": 96769
+        },
+        {
+          "url": "/products/jobkit/03-jobkit.svg",
+          "kind": "logo",
+          "alt": "jobkit application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "339bad3dc9cad5751364acc17fbd7d654783c2efe9ef5d2d80d559d940c38765",
+          "bytes": 523
+        }
+      ]
+    },
+    {
+      "id": "product.wip-commit",
+      "name": "wip-commit",
+      "slug": "wip-commit",
+      "audience": "Senior developer-platform, Git tooling, and agent-infrastructure hiring teams.",
+      "role_relevance": "supporting",
+      "license": "MIT",
+      "ready": false,
+      "blockers": [
+        {
+          "code": "case_study",
+          "message": "case study is draft"
+        },
+        {
+          "code": "declared",
+          "message": "Publish a SemVer tag and formal GitHub Release before treating wip-commit as released."
+        },
+        {
+          "code": "declared",
+          "message": "Finish and review the public case study before profile pinning."
+        }
+      ],
+      "presentation": {
+        "summary": "Guarded split-commit capture for parallel agents in shared Git checkouts.",
+        "detail": "Discover path ownership, isolate an exact staged delta, run policy gates, create a recoverable commit, and keep unrelated or concurrently staged work outside the commit.",
+        "language": "Go",
+        "lane": "Git safety and agent ergonomics"
+      },
+      "access": {
+        "profile": "go-cli",
+        "primary_action": {
+          "kind": "source",
+          "label": "Build wip-commit",
+          "url": "https://github.com/nstranquist/wip-commit#build-locally"
+        },
+        "repository_url": "https://github.com/nstranquist/wip-commit",
+        "documentation_url": "https://github.com/nstranquist/wip-commit#start-with-wip-init",
+        "feedback_url": "https://github.com/nstranquist/wip-commit/issues/new",
+        "module": "github.com/nstranquist/wip-commit",
+        "binary": "wip",
+        "smoke_argv": [
+          "go",
+          "run",
+          "./cmd/wip",
+          "--help"
+        ]
+      },
+      "proof": {
+        "claims": [
+          {
+            "id": "exact-path-capture",
+            "statement": "The workflow captures an explicit path set instead of committing the entire shared index.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/wip-commit#capture-work"
+          },
+          {
+            "id": "safety-boundary",
+            "statement": "The repository documents index ownership, recovery, and unsupported destructive operations.",
+            "evidence_kind": "documentation",
+            "evidence_url": "https://github.com/nstranquist/wip-commit#safety-scope"
+          }
+        ],
+        "boundaries": [
+          "The public repository currently has no SemVer tag or formal GitHub Release.",
+          "Guarded commits reduce shared-checkout risk but cannot infer human ownership intent."
+        ]
+      },
+      "lifecycle": {
+        "built": {
+          "state": "declared",
+          "evidence_url": "https://github.com/nstranquist/wip-commit"
+        },
+        "source_public": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/wip-commit",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "tagged": {
+          "state": "missing",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "released": {
+          "state": "missing",
+          "observed_at": "2026-08-19T00:46:05Z"
+        },
+        "access_verified": {
+          "state": "verified",
+          "evidence_url": "https://github.com/nstranquist/wip-commit#build-locally",
+          "observed_at": "2026-08-19T00:46:20Z"
+        },
+        "demo_local": {
+          "state": "declared",
+          "note": "reviewed portfolio evidence is present"
+        },
+        "demo_public": {
+          "state": "missing"
+        },
+        "deployed": {
+          "state": "missing"
+        },
+        "launched": {
+          "state": "missing"
+        },
+        "adoption": {
+          "state": "unmeasured"
+        }
+      },
+      "github": {
+        "measured": true,
+        "repository_public": true,
+        "default_branch": "main",
+        "license_spdx": "MIT",
+        "ci_state": "green",
+        "ci_url": "https://github.com/nstranquist/wip-commit/actions/runs/32183876915",
+        "observed_at": "2026-08-19T00:46:05Z"
+      },
+      "assets": [
+        {
+          "url": "/products/wip-commit/01-wip-commit.svg",
+          "kind": "logo",
+          "alt": "wip-commit application icon",
+          "provenance": "authored-svg",
+          "copyright_owner": "Nico Stranquist",
+          "sha256": "4e4981007610872de2ee217a044c5f28ddd085459b92854ac5fdea81ae544d21",
+          "bytes": 611
+        }
+      ]
+    }
+  ]
+}

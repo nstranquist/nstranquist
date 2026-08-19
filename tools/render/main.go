@@ -21,7 +21,7 @@ func main() {
 }
 
 func run(root string, check bool) error {
-	cat, err := loadCatalog(filepath.Join(root, "catalog.yaml"))
+	cat, err := loadCatalog(filepath.Join(root, "catalog.yaml"), filepath.Join(root, "data", "products.json"))
 	if err != nil {
 		return err
 	}

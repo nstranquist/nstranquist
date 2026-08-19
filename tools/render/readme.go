@@ -15,18 +15,33 @@ func renderREADME(cat Catalog) string {
 	}
 
 	b.WriteString("## Selected work\n\n")
-	b.WriteString("| Product | What it does | Release |\n| --- | --- | --- |\n")
+	b.WriteString("| Product | What it does | Access and public evidence |\n| --- | --- | --- |\n")
 	for _, p := range cat.Featured {
 		what := collapseWS(p.Summary)
 		if p.Metric.Value != "" {
 			what = strings.TrimSuffix(what, ".") + " (" + p.Metric.Label + ": " + p.Metric.Value + ")."
 		}
-		fmt.Fprintf(&b, "| [%s](%s) | %s | `%s` · %s · [%s](%s) |\n",
-			p.Name, p.URL, what, p.Language, p.License, p.Proof, p.ProofURL)
+		evidence := []string{"`" + p.Language + "`", p.License}
+		if p.ProofURL != "" {
+			evidence = append(evidence, fmt.Sprintf("[tag %s](%s)", p.Proof, p.ProofURL))
+		} else {
+			evidence = append(evidence, "no public tag")
+		}
+		if p.ReleaseURL != "" {
+			evidence = append(evidence, fmt.Sprintf("[formal release %s](%s)", p.Release, p.ReleaseURL))
+		} else {
+			evidence = append(evidence, "no formal release")
+		}
+		if !p.Ready {
+			evidence = append(evidence, "evidence gates open")
+		}
+		evidence = append(evidence, fmt.Sprintf("[%s](%s)", p.ActionLabel, p.ActionURL))
+		fmt.Fprintf(&b, "| [%s](%s) | %s | %s |\n",
+			p.Name, p.URL, what, strings.Join(evidence, " · "))
 	}
 	b.WriteString("\n")
 
-	b.WriteString("<!-- Generated from catalog.yaml by tools/render. Edit the catalog, then `make render`. -->\n")
+	b.WriteString("<!-- Generated from catalog.yaml + data/products.json by tools/render. Edit the source contracts, then `make render`. -->\n")
 	return b.String()
 }
 

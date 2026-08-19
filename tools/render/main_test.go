@@ -15,6 +15,7 @@ var requiredIDs = []string{
 	"product.nicos-hidden-menubar",
 	"product.nicos-slot-dock",
 	"product.jobkit",
+	"product.wip-commit",
 }
 
 var forbidden = []string{
@@ -57,7 +58,8 @@ func repoRoot(t *testing.T) string {
 
 func loadTestCatalog(t *testing.T) Catalog {
 	t.Helper()
-	cat, err := loadCatalog(filepath.Join(repoRoot(t), "catalog.yaml"))
+	root := repoRoot(t)
+	cat, err := loadCatalog(filepath.Join(root, "catalog.yaml"), filepath.Join(root, "data", "products.json"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -74,11 +76,36 @@ func TestCatalogFeaturedOrderAndProof(t *testing.T) {
 		if p.ID != id {
 			t.Errorf("featured[%d]=%s, want %s", i, p.ID, id)
 		}
-		if !strings.HasPrefix(p.Proof, "v") {
-			t.Errorf("%s proof %q should be a version tag", id, p.Proof)
+		if id == "product.wip-commit" {
+			if p.Proof != "no public tag" || p.ProofURL != "" || p.Release != "" {
+				t.Errorf("wip-commit must preserve missing tag/release truth: %#v", p)
+			}
+		} else {
+			if !strings.HasPrefix(p.Proof, "v") {
+				t.Errorf("%s proof %q should be a version tag", id, p.Proof)
+			}
+			if !strings.Contains(p.ProofURL, "/releases/tag/"+p.Proof) {
+				t.Errorf("%s proof_url %s does not match proof %s", id, p.ProofURL, p.Proof)
+			}
 		}
-		if !strings.Contains(p.ProofURL, "/releases/tag/"+p.Proof) {
-			t.Errorf("%s proof_url %s does not match proof %s", id, p.ProofURL, p.Proof)
+		if p.ActionURL == "" || p.ActionLabel == "" {
+			t.Errorf("%s is missing its generated primary action", id)
+		}
+	}
+}
+
+func TestCatalogCarriesReferencesInsteadOfProductCopy(t *testing.T) {
+	raw, err := os.ReadFile(filepath.Join(repoRoot(t), "catalog.yaml"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	text := string(raw)
+	if strings.Contains(text, "\nfeatured:\n") || !strings.Contains(text, "\nfeatured_ids:\n") {
+		t.Fatalf("catalog must select generated products by id, not author product rows:\n%s", text)
+	}
+	for _, field := range []string{"proof_url:", "repository_url:", "release_version:"} {
+		if strings.Contains(text, field) {
+			t.Errorf("catalog hand-authors generated field %q", field)
 		}
 	}
 }
@@ -97,16 +124,13 @@ func TestDocsPullerEvalWording(t *testing.T) {
 	if !strings.Contains(strings.ToLower(docs.Metric.Label), "sample") {
 		t.Fatalf("docs-puller metric must be labeled as a sample: %q", docs.Metric.Label)
 	}
-	if !strings.Contains(docs.Detail, "public BM25 sample") {
-		t.Fatalf("docs-puller detail must name the public BM25 sample")
-	}
 }
 
 func TestJobKitSyntheticBoundary(t *testing.T) {
 	cat := loadTestCatalog(t)
 	for _, p := range cat.Featured {
-		if p.ID == "product.jobkit" && !strings.Contains(p.Detail, "synthetic-fixture") {
-			t.Fatalf("jobkit must declare the synthetic-fixture boundary")
+		if p.ID == "product.jobkit" && !strings.Contains(strings.ToLower(p.Detail), "synthetic") {
+			t.Fatalf("jobkit must declare the synthetic fixture boundary")
 		}
 	}
 }
@@ -192,6 +216,16 @@ func TestRenderCheckRoundTrip(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := os.WriteFile(filepath.Join(root, "catalog.yaml"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	products, err := os.ReadFile(filepath.Join(src, "data", "products.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.MkdirAll(filepath.Join(root, "data"), 0o755); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(root, "data", "products.json"), products, 0o644); err != nil {
 		t.Fatal(err)
 	}
 	if err := run(root, false); err != nil {

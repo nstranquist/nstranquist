@@ -1,17 +1,18 @@
 # Nico Stranquist
 
-I build developer platforms, local tools, and full-stack products. These are current published projects with licenses and tagged releases.
+I build developer platforms, local tools, and full-stack products. Each row below links to a public repository, a verified access path, and its current tag and formal-release state. Missing evidence stays visible.
 
 ## Selected work
 
-| Product | What it does | Release |
+| Product | What it does | Access and public evidence |
 | --- | --- | --- |
-| [docs-puller](https://github.com/nstranquist/docs-puller) | Copy vendor and project docs to Markdown and search them locally (public BM25 sample: 95.8% Hit@1 · 100% Hit@5). | `Go` · Apache-2.0 · [v0.5.0](https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0) |
-| [Nicos Catalog](https://github.com/nstranquist/nicos-catalog) | Typed software catalog with full-text and relationship search, provider plugins, and drift checks. | `Go` · Apache-2.0 · [v0.1.1](https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1) |
-| [Openbook](https://github.com/nstranquist/openbook) | Realtime social app on Convex: friends, feed, comments, and messages. | `TypeScript` · MIT · [v0.1.0](https://github.com/nstranquist/openbook/releases/tag/v0.1.0) |
-| [agent-ops](https://github.com/nstranquist/agent-ops) | Record what an AI agent did, saw, and was allowed to call. | `Go` · MIT · [v0.3.2](https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2) |
-| [Nicos Hidden Bar](https://github.com/nstranquist/nicos-hidden-menubar) | Hide and reveal macOS menu-bar items. Works on your Mac only. | `Swift` · GPL-3.0 · [v0.2.0](https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0) |
-| [Nicos Slot Dock](https://github.com/nstranquist/nicos-slot-dock) | Native launcher strip that works alongside the macOS Dock. | `Swift` · MIT · [v0.3.6](https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6) |
-| [JobKit](https://github.com/nstranquist/jobkit) | Search jobs and build resumes offline. Public repo uses example data only. | `Go` · MIT · [v0.9.0](https://github.com/nstranquist/jobkit/releases/tag/v0.9.0) |
+| [docs-puller](https://github.com/nstranquist/docs-puller) | Local-first documentation retrieval with measurable search quality (public BM25 sample: 95.8% Hit@1 · 100% Hit@5). | `Go` · Apache-2.0 · [tag v0.5.0](https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0) · [formal release v0.5.0](https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0) · [Install docs-puller](https://github.com/nstranquist/docs-puller#install) |
+| [Nicos Catalog](https://github.com/nstranquist/nicos-catalog) | A typed, local-first software catalog engine for multi-repository systems. | `Go` · Apache-2.0 · [tag v0.2.0](https://github.com/nstranquist/nicos-catalog/releases/tag/v0.2.0) · [formal release v0.1.1](https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1) · [Install Nicos Catalog](https://github.com/nstranquist/nicos-catalog#install) |
+| [Openbook (realtime social network)](https://github.com/nstranquist/openbook) | A fully local realtime social-network proof on a self-hosted Convex stack. | `TypeScript` · MIT · [tag v0.1.0](https://github.com/nstranquist/openbook/releases/tag/v0.1.0) · [formal release v0.1.0](https://github.com/nstranquist/openbook/releases/tag/v0.1.0) · [Run Openbook locally](https://github.com/nstranquist/openbook#quick-start-fully-local-no-convex-account) |
+| [agent-ops](https://github.com/nstranquist/agent-ops) | One offline CLI for evidence-backed coding-agent operations. | `Go` · MIT · [tag v0.3.2](https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2) · [formal release v0.3.2](https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2) · [Install agent-ops](https://github.com/nstranquist/agent-ops#install) |
+| [Nicos Hidden Bar](https://github.com/nstranquist/nicos-hidden-menubar) | A native, local-first macOS menu-bar organizer with transparent diagnostics. | `Swift` · GPL-3.0 · [tag v0.2.0](https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0) · [formal release v0.2.0](https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0) · [Build Nicos Hidden Bar](https://github.com/nstranquist/nicos-hidden-menubar#install-from-source) |
+| [Nicos Slot Dock](https://github.com/nstranquist/nicos-slot-dock) | A native macOS launcher strip with configurable slots and optional Dock integration. | `Swift` · MIT · [tag v0.3.6](https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6) · [formal release v0.3.6](https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6) · evidence gates open · [Build Nicos Slot Dock](https://github.com/nstranquist/nicos-slot-dock#install-from-source) |
+| [jobkit](https://github.com/nstranquist/jobkit) | An offline, agent-native job-search toolkit with explicit evidence and review gates. | `Go` · MIT · [tag v0.9.0](https://github.com/nstranquist/jobkit/releases/tag/v0.9.0) · [formal release v0.9.0](https://github.com/nstranquist/jobkit/releases/tag/v0.9.0) · [Install JobKit](https://github.com/nstranquist/jobkit#quick-start) |
+| [wip-commit](https://github.com/nstranquist/wip-commit) | Guarded split-commit capture for parallel agents in shared Git checkouts. | `Go` · MIT · no public tag · no formal release · evidence gates open · [Build wip-commit](https://github.com/nstranquist/wip-commit#build-locally) |
 
-<!-- Generated from catalog.yaml by tools/render. Edit the catalog, then `make render`. -->
+<!-- Generated from catalog.yaml + data/products.json by tools/render. Edit the source contracts, then `make render`. -->

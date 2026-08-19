@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"os"
 	"strings"
@@ -11,7 +13,8 @@ import (
 type Catalog struct {
 	SchemaVersion int             `yaml:"schema_version"`
 	Identity      Identity        `yaml:"identity"`
-	Featured      []Product       `yaml:"featured"`
+	FeaturedIDs   []string        `yaml:"featured_ids"`
+	Featured      []Product       `yaml:"-"`
 	Toolbox       []string        `yaml:"toolbox"`
 	Principles    []Principle     `yaml:"principles"`
 	Footnote      string          `yaml:"footnote"`
@@ -34,18 +37,24 @@ type GlossaryEntry struct {
 }
 
 type Product struct {
-	ID       string `yaml:"id"`
-	Name     string `yaml:"name"`
-	Repo     string `yaml:"repo"`
-	URL      string `yaml:"url"`
-	ProofURL string `yaml:"proof_url"`
-	License  string `yaml:"license"`
-	Language string `yaml:"language"`
-	Lane     string `yaml:"lane"`
-	Proof    string `yaml:"proof"`
-	Summary  string `yaml:"summary"`
-	Detail   string `yaml:"detail"`
-	Metric   Metric `yaml:"metric"`
+	ID          string
+	Name        string
+	Repo        string
+	URL         string
+	ProofURL    string
+	License     string
+	Language    string
+	Lane        string
+	Proof       string
+	Release     string
+	ReleaseURL  string
+	ActionLabel string
+	ActionURL   string
+	PublicState string
+	Ready       bool
+	Summary     string
+	Detail      string
+	Metric      Metric
 }
 
 type Metric struct {
@@ -58,14 +67,90 @@ type Principle struct {
 	Body  string `yaml:"body"`
 }
 
-func loadCatalog(path string) (Catalog, error) {
-	raw, err := os.ReadFile(path)
+type productSnapshot struct {
+	SchemaVersion int                     `json:"schema_version"`
+	Products      []productSnapshotRecord `json:"products"`
+}
+
+type productSnapshotRecord struct {
+	ID           string `json:"id"`
+	Name         string `json:"name"`
+	Slug         string `json:"slug"`
+	Version      string `json:"version"`
+	VersionURL   string `json:"version_url"`
+	License      string `json:"license"`
+	Ready        bool   `json:"ready"`
+	Presentation struct {
+		Summary  string `json:"summary"`
+		Detail   string `json:"detail"`
+		Language string `json:"language"`
+		Lane     string `json:"lane"`
+		Metric   *struct {
+			Label string `json:"label"`
+			Value string `json:"value"`
+		} `json:"metric"`
+	} `json:"presentation"`
+	Access struct {
+		RepositoryURL string `json:"repository_url"`
+		PrimaryAction struct {
+			Label string `json:"label"`
+			URL   string `json:"url"`
+		} `json:"primary_action"`
+	} `json:"access"`
+	Lifecycle struct {
+		AccessVerified struct {
+			State string `json:"state"`
+		} `json:"access_verified"`
+	} `json:"lifecycle"`
+	GitHub *struct {
+		RepositoryPublic bool   `json:"repository_public"`
+		LatestTag        string `json:"latest_tag"`
+		LatestTagURL     string `json:"latest_tag_url"`
+		LatestReleaseTag string `json:"latest_release_tag"`
+		LatestReleaseURL string `json:"latest_release_url"`
+		CIState          string `json:"ci_state"`
+	} `json:"github"`
+}
+
+func loadCatalog(catalogPath, productsPath string) (Catalog, error) {
+	raw, err := os.ReadFile(catalogPath)
 	if err != nil {
 		return Catalog{}, err
 	}
 	var cat Catalog
-	if err := yaml.Unmarshal(raw, &cat); err != nil {
+	decoder := yaml.NewDecoder(bytes.NewReader(raw))
+	decoder.KnownFields(true)
+	if err := decoder.Decode(&cat); err != nil {
 		return Catalog{}, err
+	}
+	productsRaw, err := os.ReadFile(productsPath)
+	if err != nil {
+		return Catalog{}, err
+	}
+	var snapshot productSnapshot
+	if err := json.Unmarshal(productsRaw, &snapshot); err != nil {
+		return Catalog{}, fmt.Errorf("parse Product Passport snapshot: %w", err)
+	}
+	if snapshot.SchemaVersion != 1 {
+		return Catalog{}, fmt.Errorf("unsupported Product Passport schema_version %d", snapshot.SchemaVersion)
+	}
+	byID := make(map[string]productSnapshotRecord, len(snapshot.Products))
+	for _, product := range snapshot.Products {
+		if _, exists := byID[product.ID]; exists {
+			return Catalog{}, fmt.Errorf("duplicate Product Passport id %s", product.ID)
+		}
+		byID[product.ID] = product
+	}
+	for _, id := range cat.FeaturedIDs {
+		product, ok := byID[id]
+		if !ok {
+			return Catalog{}, fmt.Errorf("featured id %s is missing from data/products.json", id)
+		}
+		mapped, err := mapProductPassport(product)
+		if err != nil {
+			return Catalog{}, err
+		}
+		cat.Featured = append(cat.Featured, mapped)
 	}
 	if err := cat.validate(); err != nil {
 		return Catalog{}, err
@@ -73,8 +158,58 @@ func loadCatalog(path string) (Catalog, error) {
 	return cat, nil
 }
 
+func mapProductPassport(source productSnapshotRecord) (Product, error) {
+	if source.GitHub == nil || !source.GitHub.RepositoryPublic {
+		return Product{}, fmt.Errorf("%s is not verified as a public GitHub repository", source.ID)
+	}
+	if source.GitHub.CIState != "green" {
+		return Product{}, fmt.Errorf("%s public CI is %q, expected green", source.ID, source.GitHub.CIState)
+	}
+	if source.Lifecycle.AccessVerified.State != "verified" {
+		return Product{}, fmt.Errorf("%s access is %q, expected verified", source.ID, source.Lifecycle.AccessVerified.State)
+	}
+	if source.Version != source.GitHub.LatestTag || source.VersionURL != source.GitHub.LatestTagURL {
+		return Product{}, fmt.Errorf("%s generated version does not match its GitHub observation", source.ID)
+	}
+	repo := strings.TrimPrefix(source.Access.RepositoryURL, "https://github.com/")
+	if !strings.HasPrefix(repo, "nstranquist/") || strings.Contains(strings.TrimPrefix(repo, "nstranquist/"), "/") {
+		return Product{}, fmt.Errorf("%s repository is outside nstranquist", source.ID)
+	}
+	proof := source.Version
+	if proof == "" {
+		proof = "no public tag"
+	}
+	state := "source public"
+	if source.Version != "" {
+		state += " · tag " + source.Version
+	} else {
+		state += " · no tag"
+	}
+	if source.GitHub.LatestReleaseTag != "" {
+		state += " · release " + source.GitHub.LatestReleaseTag
+	} else {
+		state += " · no formal release"
+	}
+	if !source.Ready {
+		state += " · evidence gates open"
+	}
+	product := Product{
+		ID: source.ID, Name: source.Name, Repo: repo, URL: source.Access.RepositoryURL,
+		ProofURL: source.VersionURL, License: source.License,
+		Language: source.Presentation.Language, Lane: source.Presentation.Lane,
+		Proof: proof, Release: source.GitHub.LatestReleaseTag, ReleaseURL: source.GitHub.LatestReleaseURL,
+		ActionLabel: source.Access.PrimaryAction.Label, ActionURL: source.Access.PrimaryAction.URL,
+		PublicState: state, Ready: source.Ready, Summary: source.Presentation.Summary,
+		Detail: source.Presentation.Detail,
+	}
+	if source.Presentation.Metric != nil {
+		product.Metric = Metric{Label: source.Presentation.Metric.Label, Value: source.Presentation.Metric.Value}
+	}
+	return product, nil
+}
+
 func (c Catalog) validate() error {
-	if c.SchemaVersion != 1 {
+	if c.SchemaVersion != 2 {
 		return fmt.Errorf("unsupported schema_version %d", c.SchemaVersion)
 	}
 	if strings.TrimSpace(c.Identity.Name) == "" {
@@ -83,7 +218,7 @@ func (c Catalog) validate() error {
 	if strings.TrimSpace(c.Identity.Intro) == "" {
 		return fmt.Errorf("identity.intro is required")
 	}
-	if len(c.Featured) == 0 {
+	if len(c.FeaturedIDs) == 0 || len(c.Featured) != len(c.FeaturedIDs) {
 		return fmt.Errorf("featured catalog is empty")
 	}
 	if len(c.Glossary) == 0 {
@@ -91,7 +226,7 @@ func (c Catalog) validate() error {
 	}
 	seen := map[string]struct{}{}
 	for i, p := range c.Featured {
-		if p.ID == "" || p.Name == "" || p.Repo == "" || p.URL == "" || p.ProofURL == "" {
+		if p.ID == "" || p.Name == "" || p.Repo == "" || p.URL == "" || p.ActionURL == "" || p.PublicState == "" {
 			return fmt.Errorf("featured[%d] is missing required fields", i)
 		}
 		if !strings.HasPrefix(p.ID, "product.") {
@@ -103,8 +238,18 @@ func (c Catalog) validate() error {
 		if !strings.HasPrefix(p.URL, "https://github.com/nstranquist/") {
 			return fmt.Errorf("featured[%d].url %q is not a public nstranquist GitHub URL", i, p.URL)
 		}
-		if !strings.HasPrefix(p.ProofURL, p.URL+"/releases/tag/") {
+		if p.ProofURL != "" && !strings.HasPrefix(p.ProofURL, p.URL+"/releases/tag/") {
 			return fmt.Errorf("featured[%d].proof_url must be a release tag on %s", i, p.URL)
+		}
+		if p.ProofURL == "" && p.Proof != "no public tag" {
+			return fmt.Errorf("featured[%d] has inconsistent tag evidence", i)
+		}
+		if !strings.HasPrefix(p.ActionURL, p.URL) {
+			return fmt.Errorf("featured[%d].action_url must stay on %s", i, p.URL)
+		}
+		publicText := strings.ToLower(strings.Join([]string{p.ID, p.Name, p.Summary, p.Detail}, " "))
+		if strings.Contains(publicText, "edurain") {
+			return fmt.Errorf("featured[%d] contains a permanently excluded product marker", i)
 		}
 		if _, ok := seen[p.ID]; ok {
 			return fmt.Errorf("duplicate featured id %s", p.ID)
