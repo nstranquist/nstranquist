@@ -238,8 +238,8 @@ func (c Catalog) validate() error {
 		if !strings.HasPrefix(p.URL, "https://github.com/nstranquist/") {
 			return fmt.Errorf("featured[%d].url %q is not a public nstranquist GitHub URL", i, p.URL)
 		}
-		if p.ProofURL != "" && !strings.HasPrefix(p.ProofURL, p.URL+"/releases/tag/") {
-			return fmt.Errorf("featured[%d].proof_url must be a release tag on %s", i, p.URL)
+		if p.ProofURL != "" && !strings.HasPrefix(p.ProofURL, p.URL+"/tree/") {
+			return fmt.Errorf("featured[%d].proof_url must be a source tag tree on %s", i, p.URL)
 		}
 		if p.ProofURL == "" && p.Proof != "no public tag" {
 			return fmt.Errorf("featured[%d] has inconsistent tag evidence", i)

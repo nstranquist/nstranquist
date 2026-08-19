@@ -84,7 +84,7 @@ func TestCatalogFeaturedOrderAndProof(t *testing.T) {
 			if !strings.HasPrefix(p.Proof, "v") {
 				t.Errorf("%s proof %q should be a version tag", id, p.Proof)
 			}
-			if !strings.Contains(p.ProofURL, "/releases/tag/"+p.Proof) {
+			if !strings.Contains(p.ProofURL, "/tree/"+p.Proof) {
 				t.Errorf("%s proof_url %s does not match proof %s", id, p.ProofURL, p.Proof)
 			}
 		}
@@ -151,7 +151,7 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 			t.Errorf("README contains forbidden token %q", bad)
 		}
 	}
-	if !strings.Contains(readme, "public BM25 sample") {
+	if !strings.Contains(readme, "public live-page BM25 sample") {
 		t.Error("README must keep the docs-puller sample wording")
 	}
 	if strings.Contains(readme, "Hi, I'm") || strings.Contains(readme, "👋") {
