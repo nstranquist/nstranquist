@@ -14,26 +14,33 @@ func renderREADME(cat Catalog) string {
 		b.WriteString(para + "\n\n")
 	}
 
-	b.WriteString("## Selected work\n\n")
-	for _, p := range cat.Featured {
-		what := collapseWS(p.Summary)
-		if p.Metric.Value != "" {
-			what = strings.TrimSuffix(what, ".") + " (" + p.Metric.Label + ": " + p.Metric.Value + ")."
+	writeList := func(heading string, products []Product) {
+		if len(products) == 0 {
+			return
 		}
-		meta := []string{"`" + p.Language + "`", p.License}
-		if p.ProofURL != "" {
-			meta = append(meta, fmt.Sprintf("[%s](%s)", p.Proof, p.ProofURL))
-		} else {
-			meta = append(meta, "no public tag")
+		fmt.Fprintf(&b, "## %s\n\n", heading)
+		for _, p := range products {
+			what := collapseWS(p.Summary)
+			if p.Metric.Value != "" {
+				what = strings.TrimSuffix(what, ".") + " (" + p.Metric.Label + ": " + p.Metric.Value + ")."
+			}
+			meta := []string{"`" + p.Language + "`", p.License}
+			if p.ProofURL != "" {
+				meta = append(meta, fmt.Sprintf("[%s](%s)", p.Proof, p.ProofURL))
+			} else {
+				meta = append(meta, "no public tag")
+			}
+			if p.DemoURL != "" {
+				meta = append(meta, fmt.Sprintf("[live demo](%s)", p.DemoURL))
+			}
+			fmt.Fprintf(&b, "- **[%s](%s)** — %s %s\n", p.Name, p.URL, what, strings.Join(meta, " · "))
 		}
-		if p.DemoURL != "" {
-			meta = append(meta, fmt.Sprintf("[live demo](%s)", p.DemoURL))
-		}
-		fmt.Fprintf(&b, "- **[%s](%s)** — %s %s\n", p.Name, p.URL, what, strings.Join(meta, " · "))
+		b.WriteString("\n")
 	}
-	b.WriteString("\n")
+	writeList("Selected work", cat.Featured)
+	writeList("More on GitHub", cat.More)
 	if id.Site != "" {
-		fmt.Fprintf(&b, "Longer write-ups live at [%s](%s).\n\n", strings.TrimPrefix(id.Site, "https://"), id.Site)
+		fmt.Fprintf(&b, "Longer write-ups: [%s](%s).\n\n", strings.TrimPrefix(id.Site, "https://"), id.Site)
 	}
 
 	b.WriteString("<!-- Generated from catalog.yaml + data/products.json by tools/render. Edit the source contracts, then `make render`. -->\n")
@@ -48,7 +55,7 @@ func renderPreview(cat Catalog) string {
 	b.WriteString("<section><h2>Banner</h2><div class=\"pair\"><img src=\"assets/banner-dark.svg\" alt=\"banner dark\"><img src=\"assets/banner-light.svg\" alt=\"banner light\"></div></section>\n")
 	b.WriteString("<section><h2>Catalog</h2><div class=\"pair\"><img src=\"assets/catalog-dark.svg\" alt=\"catalog dark\"><img src=\"assets/catalog-light.svg\" alt=\"catalog light\"></div></section>\n")
 	b.WriteString("<section><h2>Cards</h2><div class=\"pair\">\n")
-	for _, p := range cat.Featured {
+	for _, p := range append(append([]Product{}, cat.Featured...), cat.More...) {
 		slug := slugFor(p)
 		fmt.Fprintf(&b, "<img src=\"assets/cards/%s-dark.svg\" alt=\"%s dark\">\n", slug, xml(p.Name))
 		fmt.Fprintf(&b, "<img src=\"assets/cards/%s-light.svg\" alt=\"%s light\">\n", slug, xml(p.Name))

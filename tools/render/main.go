@@ -34,7 +34,7 @@ func run(root string, check bool) error {
 		filepath.Join(root, "assets", "catalog-light.svg"): renderCatalogBoard(cat, themeLight()),
 		filepath.Join(root, "preview.html"):                renderPreview(cat),
 	}
-	for _, p := range cat.Featured {
+	for _, p := range append(append([]Product{}, cat.Featured...), cat.More...) {
 		slug := slugFor(p)
 		files[filepath.Join(root, "assets", "cards", slug+"-dark.svg")] = renderCard(p, themeDark())
 		files[filepath.Join(root, "assets", "cards", slug+"-light.svg")] = renderCard(p, themeLight())

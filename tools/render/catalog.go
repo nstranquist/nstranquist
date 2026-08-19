@@ -13,10 +13,12 @@ import (
 type Catalog struct {
 	SchemaVersion int                   `yaml:"schema_version"`
 	Identity      Identity              `yaml:"identity"`
-	FeaturedIDs    []string                 `yaml:"featured_ids"`
-	Featured       []Product                `yaml:"-"`
-	ExtraProducts  map[string]ExtraProduct  `yaml:"extra_products"`
-	PublicCopy     map[string]PublicCopy    `yaml:"public_copy"`
+	FeaturedIDs   []string                `yaml:"featured_ids"`
+	Featured      []Product               `yaml:"-"`
+	MoreIDs       []string                `yaml:"more_ids"`
+	More          []Product               `yaml:"-"`
+	ExtraProducts map[string]ExtraProduct `yaml:"extra_products"`
+	PublicCopy    map[string]PublicCopy   `yaml:"public_copy"`
 	Toolbox       []string              `yaml:"toolbox"`
 	Principles    []Principle           `yaml:"principles"`
 	Footnote      string                `yaml:"footnote"`
@@ -165,7 +167,7 @@ func loadCatalog(catalogPath, productsPath string) (Catalog, error) {
 		}
 		byID[product.ID] = product
 	}
-	for _, id := range cat.FeaturedIDs {
+	resolve := func(id string) (Product, error) {
 		var mapped Product
 		var err error
 		if product, ok := byID[id]; ok {
@@ -173,10 +175,10 @@ func loadCatalog(catalogPath, productsPath string) (Catalog, error) {
 		} else if extra, ok := cat.ExtraProducts[id]; ok {
 			mapped, err = mapExtraProduct(id, extra)
 		} else {
-			return Catalog{}, fmt.Errorf("featured id %s is missing from data/products.json and extra_products", id)
+			return Product{}, fmt.Errorf("%s is missing from data/products.json and extra_products", id)
 		}
 		if err != nil {
-			return Catalog{}, err
+			return Product{}, err
 		}
 		if copy, ok := cat.PublicCopy[id]; ok {
 			if copy.Name != "" {
@@ -186,7 +188,21 @@ func loadCatalog(catalogPath, productsPath string) (Catalog, error) {
 				mapped.Summary = copy.Summary
 			}
 		}
+		return mapped, nil
+	}
+	for _, id := range cat.FeaturedIDs {
+		mapped, err := resolve(id)
+		if err != nil {
+			return Catalog{}, err
+		}
 		cat.Featured = append(cat.Featured, mapped)
+	}
+	for _, id := range cat.MoreIDs {
+		mapped, err := resolve(id)
+		if err != nil {
+			return Catalog{}, err
+		}
+		cat.More = append(cat.More, mapped)
 	}
 	if err := cat.validate(); err != nil {
 		return Catalog{}, err
@@ -283,11 +299,14 @@ func (c Catalog) validate() error {
 	if len(c.FeaturedIDs) == 0 || len(c.Featured) != len(c.FeaturedIDs) {
 		return fmt.Errorf("featured catalog is empty")
 	}
+	if len(c.More) != len(c.MoreIDs) {
+		return fmt.Errorf("more catalog length mismatch")
+	}
 	if len(c.Glossary) == 0 {
 		return fmt.Errorf("glossary is required")
 	}
 	seen := map[string]struct{}{}
-	for i, p := range c.Featured {
+	for i, p := range append(append([]Product{}, c.Featured...), c.More...) {
 		if p.ID == "" || p.Name == "" || p.Repo == "" || p.URL == "" || p.ActionURL == "" || p.PublicState == "" {
 			return fmt.Errorf("featured[%d] is missing required fields", i)
 		}

@@ -16,6 +16,9 @@ var requiredIDs = []string{
 	"product.nicos-slot-dock",
 	"product.jobkit",
 	"product.session-pressure",
+}
+
+var moreIDs = []string{
 	"product.keepawake",
 	"product.wip-commit",
 	"product.snapref",
@@ -89,6 +92,14 @@ func TestCatalogFeaturedOrderAndProof(t *testing.T) {
 			t.Errorf("%s missing public state", p.ID)
 		}
 	}
+	if len(cat.More) != len(moreIDs) {
+		t.Fatalf("more count %d, want %d", len(cat.More), len(moreIDs))
+	}
+	for i, id := range moreIDs {
+		if cat.More[i].ID != id {
+			t.Errorf("more[%d]=%s, want %s", i, cat.More[i].ID, id)
+		}
+	}
 	for i, id := range requiredIDs {
 		p := cat.Featured[i]
 		if p.ID != id {
@@ -110,6 +121,13 @@ func TestCatalogFeaturedOrderAndProof(t *testing.T) {
 			t.Errorf("%s is missing its generated primary action", id)
 		}
 	}
+	for _, p := range cat.More {
+		if untaggedIDs[p.ID] {
+			if p.Proof != "no public tag" || p.ProofURL != "" {
+				t.Errorf("%s must preserve missing tag truth: %#v", p.ID, p)
+			}
+		}
+	}
 }
 
 func TestCatalogCarriesReferencesInsteadOfProductCopy(t *testing.T) {
@@ -123,6 +141,9 @@ func TestCatalogCarriesReferencesInsteadOfProductCopy(t *testing.T) {
 	}
 	if !strings.Contains(text, "\nextra_products:\n") {
 		t.Fatal("catalog must keep extra_products for extracts without passports")
+	}
+	if !strings.Contains(text, "\nmore_ids:\n") {
+		t.Fatal("catalog must keep more_ids for supporting public source")
 	}
 }
 
@@ -170,7 +191,13 @@ func TestREADMEIsACompactList(t *testing.T) {
 func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	cat := loadTestCatalog(t)
 	readme := renderREADME(cat)
-	for _, p := range cat.Featured {
+	if !strings.Contains(readme, "## More on GitHub") {
+		t.Fatal("README must keep a second list for supporting public source")
+	}
+	if strings.Contains(strings.ToLower(readme), "missing tags stay visible") || strings.Contains(strings.ToLower(readme), "stand behind") {
+		t.Fatal("README still uses catalog-manifesto phrasing")
+	}
+	for _, p := range append(append([]Product{}, cat.Featured...), cat.More...) {
 		needles := []string{p.Name, p.URL, p.License}
 		if p.ProofURL != "" {
 			needles = append(needles, p.ProofURL)
