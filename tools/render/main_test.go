@@ -181,7 +181,7 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	if !strings.Contains(readme, "public live-page BM25 sample") {
 		t.Error("README must keep the docs-puller sample wording")
 	}
-	if !strings.Contains(readme, "https://docs-puller-demo.darthbitcoin.workers.dev") {
+	if !strings.Contains(readme, "https://docs-puller-demo.nstranquist.workers.dev") {
 		t.Error("README must link the docs-puller live demo")
 	}
 	if !strings.Contains(readme, "docs-puller/tree/v0.7.6") {
