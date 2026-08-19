@@ -71,6 +71,11 @@ func TestCatalogFeaturedOrderAndProof(t *testing.T) {
 	if len(cat.Featured) != len(requiredIDs) {
 		t.Fatalf("featured count %d, want %d", len(cat.Featured), len(requiredIDs))
 	}
+	for _, p := range cat.Featured {
+		if p.PublicState == "" {
+			t.Errorf("%s missing public state", p.ID)
+		}
+	}
 	for i, id := range requiredIDs {
 		p := cat.Featured[i]
 		if p.ID != id {
@@ -135,11 +140,33 @@ func TestJobKitSyntheticBoundary(t *testing.T) {
 	}
 }
 
+func TestREADMEIsACompactList(t *testing.T) {
+	readme := renderREADME(loadTestCatalog(t))
+	if strings.Contains(readme, "| Product |") || strings.Contains(readme, "| --- |") {
+		t.Fatal("README must stay a compact list, not a markdown table")
+	}
+	if !strings.Contains(readme, "- **[") {
+		t.Fatal("README must render selected work as a bullet list")
+	}
+	if strings.Contains(readme, "formal release") || strings.Contains(readme, "evidence gates open") {
+		t.Fatal("README list must not repeat the evidence spreadsheet columns")
+	}
+	if strings.Contains(readme, "👋") || strings.Contains(readme, "🚀") {
+		t.Fatal("README must not copy emoji catalog voice")
+	}
+}
+
 func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	cat := loadTestCatalog(t)
 	readme := renderREADME(cat)
 	for _, p := range cat.Featured {
-		for _, needle := range []string{p.Name, p.URL, p.ProofURL, p.License} {
+		needles := []string{p.Name, p.URL, p.License}
+		if p.ProofURL != "" {
+			needles = append(needles, p.ProofURL)
+		} else if !strings.Contains(readme, "no public tag") {
+			t.Errorf("%s is missing its missing-tag marker", p.ID)
+		}
+		for _, needle := range needles {
 			if !strings.Contains(readme, needle) {
 				t.Errorf("README missing %q", needle)
 			}
@@ -153,6 +180,21 @@ func TestREADMEContainsProofAndOmitsForbidden(t *testing.T) {
 	}
 	if !strings.Contains(readme, "public live-page BM25 sample") {
 		t.Error("README must keep the docs-puller sample wording")
+	}
+	if !strings.Contains(readme, "https://docs-puller-demo.darthbitcoin.workers.dev") {
+		t.Error("README must link the docs-puller live demo")
+	}
+	if !strings.Contains(readme, "docs-puller/tree/v0.7.6") {
+		t.Error("README must cite the live docs-puller tag")
+	}
+	if !strings.Contains(readme, "example data only") {
+		t.Error("README must keep the JobKit synthetic-data boundary")
+	}
+	if strings.Contains(readme, "agent-native") || strings.Contains(readme, "evidence-backed") {
+		t.Error("README must use public one-liners, not passport hiring copy")
+	}
+	if !strings.Contains(readme, "https://nstranquist.github.io") {
+		t.Error("README must point at the public catalog site")
 	}
 	if strings.Contains(readme, "Hi, I'm") || strings.Contains(readme, "👋") {
 		t.Error("README should not use the generic profile greeting")

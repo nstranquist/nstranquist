@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-19T01:07:12Z",
+  "generated_at": "2026-08-19T18:09:40Z",
   "source": "nicos-tools catalog Product Passport projection",
   "products": [
     {
@@ -25,12 +25,13 @@
       "access": {
         "profile": "go-cli",
         "primary_action": {
-          "kind": "install",
-          "label": "Install docs-puller",
-          "url": "https://github.com/nstranquist/docs-puller#install"
+          "kind": "try",
+          "label": "Try the live demo",
+          "url": "https://docs-puller-demo.darthbitcoin.workers.dev"
         },
         "repository_url": "https://github.com/nstranquist/docs-puller",
         "documentation_url": "https://github.com/nstranquist/docs-puller#quick-start",
+        "demo_url": "https://docs-puller-demo.darthbitcoin.workers.dev",
         "feedback_url": "https://github.com/nstranquist/docs-puller/issues/new",
         "module": "github.com/nstranquist/docs-puller",
         "binary": "docs-puller",
@@ -60,11 +61,17 @@
             "statement": "The public case study documents the architecture, measured results, release discipline, and claim boundaries.",
             "evidence_kind": "documentation",
             "evidence_url": "https://github.com/nstranquist/docs-puller/blob/main/CASE_STUDY.md"
+          },
+          {
+            "id": "public-live-demo",
+            "statement": "The public demo searches the reviewed sample corpus through the same Go and SQLite FTS5 engine as the CLI.",
+            "evidence_kind": "demo",
+            "evidence_url": "https://docs-puller-demo.darthbitcoin.workers.dev"
           }
         ],
         "boundaries": [
           "Optional reranking and embeddings need separately configured model providers.",
-          "Public source, releases, and local evaluation do not prove external adoption."
+          "Public source, releases, deployment health, and synthetic checks do not prove external adoption."
         ]
       },
       "lifecycle": {
@@ -75,22 +82,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/docs-puller",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:39Z"
         },
         "tagged": {
           "state": "verified",
-          "evidence_url": "https://github.com/nstranquist/docs-puller/tree/v0.5.0",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "evidence_url": "https://github.com/nstranquist/docs-puller/tree/v0.7.6",
+          "observed_at": "2026-08-19T18:09:39Z"
         },
         "released": {
           "state": "verified",
-          "evidence_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "evidence_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.7.6",
+          "observed_at": "2026-08-19T18:09:39Z"
         },
         "access_verified": {
           "state": "verified",
-          "evidence_url": "https://github.com/nstranquist/docs-puller#install",
-          "observed_at": "2026-08-19T01:07:12Z",
+          "evidence_url": "https://docs-puller-demo.darthbitcoin.workers.dev",
+          "observed_at": "2026-08-19T18:09:40Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -98,13 +105,15 @@
           "note": "reviewed portfolio evidence is present"
         },
         "demo_public": {
-          "state": "missing"
+          "state": "declared",
+          "evidence_url": "https://docs-puller-demo.darthbitcoin.workers.dev"
         },
         "deployed": {
-          "state": "missing"
+          "state": "declared",
+          "evidence_url": "https://docs-puller-demo.darthbitcoin.workers.dev"
         },
         "launched": {
-          "state": "missing"
+          "state": "declared"
         },
         "adoption": {
           "state": "unmeasured"
@@ -115,16 +124,17 @@
         "repository_public": true,
         "default_branch": "main",
         "license_spdx": "Apache-2.0",
-        "latest_tag": "v0.5.0",
-        "latest_tag_url": "https://github.com/nstranquist/docs-puller/tree/v0.5.0",
-        "latest_release_tag": "v0.5.0",
-        "latest_release_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.5.0",
+        "latest_tag": "v0.7.6",
+        "latest_tag_url": "https://github.com/nstranquist/docs-puller/tree/v0.7.6",
+        "latest_release_tag": "v0.7.6",
+        "latest_release_url": "https://github.com/nstranquist/docs-puller/releases/tag/v0.7.6",
+        "release_asset_count": 12,
         "ci_state": "green",
-        "ci_url": "https://github.com/nstranquist/docs-puller/actions/runs/32040914535",
-        "observed_at": "2026-08-19T01:07:10Z"
+        "ci_url": "https://github.com/nstranquist/docs-puller/actions/runs/32284265847",
+        "observed_at": "2026-08-19T18:09:39Z"
       },
-      "version": "v0.5.0",
-      "version_url": "https://github.com/nstranquist/docs-puller/tree/v0.5.0",
+      "version": "v0.7.6",
+      "version_url": "https://github.com/nstranquist/docs-puller/tree/v0.7.6",
       "assets": [
         {
           "url": "/products/docs-puller/01-search-results.png",
@@ -218,22 +228,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-catalog",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "tagged": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-catalog/tree/v0.2.0",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "released": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-catalog#install",
-          "observed_at": "2026-08-19T01:07:13Z",
+          "observed_at": "2026-08-19T18:09:42Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -262,9 +272,9 @@
         "latest_tag_url": "https://github.com/nstranquist/nicos-catalog/tree/v0.2.0",
         "latest_release_tag": "v0.1.1",
         "latest_release_url": "https://github.com/nstranquist/nicos-catalog/releases/tag/v0.1.1",
-        "ci_state": "green",
-        "ci_url": "https://github.com/nstranquist/nicos-catalog/actions/runs/32004974313",
-        "observed_at": "2026-08-19T01:07:10Z"
+        "ci_state": "failure",
+        "ci_url": "https://github.com/nstranquist/nicos-catalog/actions/runs/32284654651",
+        "observed_at": "2026-08-19T18:09:37Z"
       },
       "version": "v0.2.0",
       "version_url": "https://github.com/nstranquist/nicos-catalog/tree/v0.2.0",
@@ -357,22 +367,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/openbook",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:39Z"
         },
         "tagged": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/openbook/tree/v0.1.0",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:39Z"
         },
         "released": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:39Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/openbook#quick-start-fully-local-no-convex-account",
-          "observed_at": "2026-08-19T01:07:14Z",
+          "observed_at": "2026-08-19T18:09:43Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -402,8 +412,8 @@
         "latest_release_tag": "v0.1.0",
         "latest_release_url": "https://github.com/nstranquist/openbook/releases/tag/v0.1.0",
         "ci_state": "green",
-        "ci_url": "https://github.com/nstranquist/openbook/actions/runs/31795982664",
-        "observed_at": "2026-08-19T01:07:11Z"
+        "ci_url": "https://github.com/nstranquist/openbook/actions/runs/32284025100",
+        "observed_at": "2026-08-19T18:09:39Z"
       },
       "version": "v0.1.0",
       "version_url": "https://github.com/nstranquist/openbook/tree/v0.1.0",
@@ -490,22 +500,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/agent-ops",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "tagged": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/agent-ops/tree/v0.3.2",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "released": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/agent-ops#install",
-          "observed_at": "2026-08-19T01:07:15Z",
+          "observed_at": "2026-08-19T18:09:43Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -536,7 +546,7 @@
         "latest_release_url": "https://github.com/nstranquist/agent-ops/releases/tag/v0.3.2",
         "ci_state": "green",
         "ci_url": "https://github.com/nstranquist/agent-ops/actions/runs/31844635304",
-        "observed_at": "2026-08-19T01:07:10Z"
+        "observed_at": "2026-08-19T18:09:37Z"
       },
       "version": "v0.3.2",
       "version_url": "https://github.com/nstranquist/agent-ops/tree/v0.3.2",
@@ -610,22 +620,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:38Z"
         },
         "tagged": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar/tree/v0.2.0",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:38Z"
         },
         "released": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:38Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-hidden-menubar#install-from-source",
-          "observed_at": "2026-08-19T01:07:15Z",
+          "observed_at": "2026-08-19T18:09:43Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -654,9 +664,9 @@
         "latest_tag_url": "https://github.com/nstranquist/nicos-hidden-menubar/tree/v0.2.0",
         "latest_release_tag": "v0.2.0",
         "latest_release_url": "https://github.com/nstranquist/nicos-hidden-menubar/releases/tag/v0.2.0",
-        "ci_state": "green",
-        "ci_url": "https://github.com/nstranquist/nicos-hidden-menubar/actions/runs/32040912926",
-        "observed_at": "2026-08-19T01:07:11Z"
+        "ci_state": "failure",
+        "ci_url": "https://github.com/nstranquist/nicos-hidden-menubar/actions/runs/32284030340",
+        "observed_at": "2026-08-19T18:09:38Z"
       },
       "version": "v0.2.0",
       "version_url": "https://github.com/nstranquist/nicos-hidden-menubar/tree/v0.2.0",
@@ -745,22 +755,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-slot-dock",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "tagged": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-slot-dock/tree/v0.3.6",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "released": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/nicos-slot-dock#install-from-source",
-          "observed_at": "2026-08-19T01:07:19Z",
+          "observed_at": "2026-08-19T18:09:47Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -791,7 +801,7 @@
         "latest_release_url": "https://github.com/nstranquist/nicos-slot-dock/releases/tag/v0.3.6",
         "ci_state": "green",
         "ci_url": "https://github.com/nstranquist/nicos-slot-dock/actions/runs/32040453641",
-        "observed_at": "2026-08-19T01:07:11Z"
+        "observed_at": "2026-08-19T18:09:37Z"
       },
       "version": "v0.3.6",
       "version_url": "https://github.com/nstranquist/nicos-slot-dock/tree/v0.3.6",
@@ -888,22 +898,22 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/jobkit",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:38Z"
         },
         "tagged": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/jobkit/tree/v0.9.0",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:38Z"
         },
         "released": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
-          "observed_at": "2026-08-19T01:07:11Z"
+          "observed_at": "2026-08-19T18:09:38Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/jobkit#quick-start",
-          "observed_at": "2026-08-19T01:07:26Z",
+          "observed_at": "2026-08-19T18:09:53Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -934,7 +944,7 @@
         "latest_release_url": "https://github.com/nstranquist/jobkit/releases/tag/v0.9.0",
         "ci_state": "green",
         "ci_url": "https://github.com/nstranquist/jobkit/actions/runs/31976701959",
-        "observed_at": "2026-08-19T01:07:11Z"
+        "observed_at": "2026-08-19T18:09:38Z"
       },
       "version": "v0.9.0",
       "version_url": "https://github.com/nstranquist/jobkit/tree/v0.9.0",
@@ -1045,20 +1055,20 @@
         "source_public": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/wip-commit",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "tagged": {
           "state": "missing",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "released": {
           "state": "missing",
-          "observed_at": "2026-08-19T01:07:10Z"
+          "observed_at": "2026-08-19T18:09:37Z"
         },
         "access_verified": {
           "state": "verified",
           "evidence_url": "https://github.com/nstranquist/wip-commit#build-locally",
-          "observed_at": "2026-08-19T01:07:27Z",
+          "observed_at": "2026-08-19T18:09:54Z",
           "note": "The declared command passed in the local product checkout; this does not prove the public default branch or external adoption."
         },
         "demo_local": {
@@ -1085,7 +1095,7 @@
         "license_spdx": "MIT",
         "ci_state": "green",
         "ci_url": "https://github.com/nstranquist/wip-commit/actions/runs/32183876915",
-        "observed_at": "2026-08-19T01:07:10Z"
+        "observed_at": "2026-08-19T18:09:37Z"
       },
       "assets": [
         {

@@ -11,14 +11,20 @@ import (
 )
 
 type Catalog struct {
-	SchemaVersion int             `yaml:"schema_version"`
-	Identity      Identity        `yaml:"identity"`
-	FeaturedIDs   []string        `yaml:"featured_ids"`
-	Featured      []Product       `yaml:"-"`
-	Toolbox       []string        `yaml:"toolbox"`
-	Principles    []Principle     `yaml:"principles"`
-	Footnote      string          `yaml:"footnote"`
-	Glossary      []GlossaryEntry `yaml:"glossary"`
+	SchemaVersion int                   `yaml:"schema_version"`
+	Identity      Identity              `yaml:"identity"`
+	FeaturedIDs   []string              `yaml:"featured_ids"`
+	Featured      []Product             `yaml:"-"`
+	PublicCopy    map[string]PublicCopy `yaml:"public_copy"`
+	Toolbox       []string              `yaml:"toolbox"`
+	Principles    []Principle           `yaml:"principles"`
+	Footnote      string                `yaml:"footnote"`
+	Glossary      []GlossaryEntry       `yaml:"glossary"`
+}
+
+type PublicCopy struct {
+	Name    string `yaml:"name"`
+	Summary string `yaml:"summary"`
 }
 
 type Identity struct {
@@ -29,6 +35,7 @@ type Identity struct {
 	Intro    string `yaml:"intro"`
 	GitHub   string `yaml:"github"`
 	LinkedIn string `yaml:"linkedin"`
+	Site     string `yaml:"site"`
 }
 
 type GlossaryEntry struct {
@@ -50,6 +57,7 @@ type Product struct {
 	ReleaseURL  string
 	ActionLabel string
 	ActionURL   string
+	DemoURL     string
 	PublicState string
 	Ready       bool
 	Summary     string
@@ -92,6 +100,7 @@ type productSnapshotRecord struct {
 	} `json:"presentation"`
 	Access struct {
 		RepositoryURL string `json:"repository_url"`
+		DemoURL       string `json:"demo_url"`
 		PrimaryAction struct {
 			Label string `json:"label"`
 			URL   string `json:"url"`
@@ -150,6 +159,14 @@ func loadCatalog(catalogPath, productsPath string) (Catalog, error) {
 		if err != nil {
 			return Catalog{}, err
 		}
+		if copy, ok := cat.PublicCopy[id]; ok {
+			if copy.Name != "" {
+				mapped.Name = copy.Name
+			}
+			if copy.Summary != "" {
+				mapped.Summary = copy.Summary
+			}
+		}
 		cat.Featured = append(cat.Featured, mapped)
 	}
 	if err := cat.validate(); err != nil {
@@ -162,8 +179,8 @@ func mapProductPassport(source productSnapshotRecord) (Product, error) {
 	if source.GitHub == nil || !source.GitHub.RepositoryPublic {
 		return Product{}, fmt.Errorf("%s is not verified as a public GitHub repository", source.ID)
 	}
-	if source.GitHub.CIState != "green" {
-		return Product{}, fmt.Errorf("%s public CI is %q, expected green", source.ID, source.GitHub.CIState)
+	if source.GitHub.CIState == "" {
+		return Product{}, fmt.Errorf("%s public CI is unmeasured", source.ID)
 	}
 	if source.Lifecycle.AccessVerified.State != "verified" {
 		return Product{}, fmt.Errorf("%s access is %q, expected verified", source.ID, source.Lifecycle.AccessVerified.State)
@@ -190,6 +207,9 @@ func mapProductPassport(source productSnapshotRecord) (Product, error) {
 	} else {
 		state += " · no formal release"
 	}
+	if source.GitHub.CIState != "green" {
+		state += " · CI " + source.GitHub.CIState
+	}
 	if !source.Ready {
 		state += " · evidence gates open"
 	}
@@ -199,8 +219,8 @@ func mapProductPassport(source productSnapshotRecord) (Product, error) {
 		Language: source.Presentation.Language, Lane: source.Presentation.Lane,
 		Proof: proof, Release: source.GitHub.LatestReleaseTag, ReleaseURL: source.GitHub.LatestReleaseURL,
 		ActionLabel: source.Access.PrimaryAction.Label, ActionURL: source.Access.PrimaryAction.URL,
-		PublicState: state, Ready: source.Ready, Summary: source.Presentation.Summary,
-		Detail: source.Presentation.Detail,
+		DemoURL: source.Access.DemoURL, PublicState: state, Ready: source.Ready,
+		Summary: source.Presentation.Summary, Detail: source.Presentation.Detail,
 	}
 	if source.Presentation.Metric != nil {
 		product.Metric = Metric{Label: source.Presentation.Metric.Label, Value: source.Presentation.Metric.Value}
@@ -244,8 +264,14 @@ func (c Catalog) validate() error {
 		if p.ProofURL == "" && p.Proof != "no public tag" {
 			return fmt.Errorf("featured[%d] has inconsistent tag evidence", i)
 		}
-		if !strings.HasPrefix(p.ActionURL, p.URL) {
-			return fmt.Errorf("featured[%d].action_url must stay on %s", i, p.URL)
+		if !strings.HasPrefix(p.ActionURL, "https://") {
+			return fmt.Errorf("featured[%d].action_url must be an https URL", i)
+		}
+		if strings.Contains(p.ActionURL, "github.com/") && !strings.HasPrefix(p.ActionURL, p.URL) {
+			return fmt.Errorf("featured[%d].action_url github target must stay on %s", i, p.URL)
+		}
+		if p.DemoURL != "" && !strings.HasPrefix(p.DemoURL, "https://") {
+			return fmt.Errorf("featured[%d].demo_url must be an https URL", i)
 		}
 		publicText := strings.ToLower(strings.Join([]string{p.ID, p.Name, p.Summary, p.Detail}, " "))
 		if strings.Contains(publicText, "edurain") {

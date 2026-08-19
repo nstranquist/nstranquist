@@ -8,11 +8,11 @@ identity:
   location: St. Louis
   thesis: Developer platforms, local tools, and full-stack products.
   intro: |
-    I build developer platforms, local tools, and full-stack products. Each row
-    below links to a public repository, a locally verified access path, and its
-    current tag and formal-release state. Missing evidence stays visible.
+    I build developer platforms, local tools, and full-stack products. Each item
+    links to a public repository. Missing tags stay visible.
   github: https://github.com/nstranquist
   linkedin: https://linkedin.com/in/nstranquist
+  site: https://nstranquist.github.io
 featured_ids:
   - product.docs-puller
   - product.nicos-catalog
@@ -22,6 +22,25 @@ featured_ids:
   - product.nicos-slot-dock
   - product.jobkit
   - product.wip-commit
+public_copy:
+  product.docs-puller:
+    summary: Search vendor and project docs on your machine.
+  product.nicos-catalog:
+    summary: A local engine for software catalogs.
+  product.openbook:
+    name: Openbook
+    summary: A realtime social app on Convex.
+  product.agent-ops:
+    summary: Local records of what an AI agent did.
+  product.nicos-hidden-menubar:
+    summary: Hide and reveal macOS menu-bar items.
+  product.nicos-slot-dock:
+    summary: A native launcher strip next to the macOS Dock.
+  product.jobkit:
+    name: JobKit
+    summary: Offline job-search CLI. Public tree uses example data only.
+  product.wip-commit:
+    summary: Guarded split-commit capture for parallel agents.
 toolbox:
   - Go
   - TypeScript
