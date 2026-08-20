@@ -30,7 +30,6 @@ var moreIDs = []string{
 var untaggedIDs = map[string]bool{
 	"product.wip-commit":            true,
 	"product.ngtm":                  true,
-	"product.nicos-flag-eval":       true,
 	"product.nicos-window-switcher": true,
 }
 

@@ -19,7 +19,7 @@ Senior software engineer. Full-stack products, developer platforms, and AI syste
 - **[keepawake](https://github.com/nstranquist/keepawake)** — Keep a closed-lid Mac awake on purpose. `Go` · MIT · [v0.1.3](https://github.com/nstranquist/keepawake/tree/v0.1.3)
 - **[SnapRef](https://github.com/nstranquist/snapref)** — Local browser automation for agents. `Go` · Apache-2.0 · [v0.2.0-rc.1](https://github.com/nstranquist/snapref/tree/v0.2.0-rc.1)
 - **[Nicos GTM](https://github.com/nstranquist/ngtm)** — Local go-to-market toolkit. Claims need evidence. `Go` · MIT · no public tag
-- **[nicos-flag-eval](https://github.com/nstranquist/nicos-flag-eval)** — Feature-flag evaluator in Go, TypeScript, and Swift. Demo data only. `Go` · MIT · no public tag
+- **[nicos-flag-eval](https://github.com/nstranquist/nicos-flag-eval)** — Feature-flag evaluator in Go, TypeScript, and Swift. Demo data only. `Go` · MIT · [v0.1.7](https://github.com/nstranquist/nicos-flag-eval/tree/v0.1.7)
 - **[Nicos Window Switcher](https://github.com/nstranquist/nicos-window-switcher)** — macOS window switcher. Lists windows, not apps. `Swift` · MIT · no public tag
 
 Longer write-ups: [nstranquist.github.io](https://nstranquist.github.io).

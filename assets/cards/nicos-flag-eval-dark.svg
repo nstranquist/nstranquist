@@ -7,5 +7,5 @@
   <text x="22" y="58" fill="#918f88" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12">feature flags  ·  Go</text>
   <text x="22" y="88" fill="#f0eee7" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="14">Feature-flag evaluator in Go, TypeScript, and</text>
   <text x="22" y="108" fill="#f0eee7" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="14">Swift. Demo data only.</text>
-  <text x="398" y="148" text-anchor="end" fill="#5c7cff" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12">no public tag</text>
+  <text x="398" y="148" text-anchor="end" fill="#5c7cff" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12">v0.1.7</text>
 </svg>
