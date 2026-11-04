@@ -7,5 +7,5 @@
   <text x="22" y="58" fill="#6f6c64" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12">host admission  ·  Go</text>
   <text x="22" y="88" fill="#161614" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="14">Local host admission for concurrent coding</text>
   <text x="22" y="108" fill="#161614" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="14">agents on one Mac.</text>
-  <text x="398" y="148" text-anchor="end" fill="#3d5fe0" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12">v0.1.0</text>
+  <text x="398" y="148" text-anchor="end" fill="#3d5fe0" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12">v0.5.2</text>
 </svg>

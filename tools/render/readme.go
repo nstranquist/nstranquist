@@ -40,7 +40,7 @@ func renderREADME(cat Catalog) string {
 	writeList("Selected work", cat.Featured)
 	writeList("More on GitHub", cat.More)
 	if id.Site != "" {
-		fmt.Fprintf(&b, "Longer write-ups: [%s](%s).\n\n", strings.TrimPrefix(id.Site, "https://"), id.Site)
+		fmt.Fprintf(&b, "Career history, resume, and longer write-ups: [%s](%s).\n\n", strings.TrimPrefix(id.Site, "https://"), id.Site)
 	}
 
 	b.WriteString("<!-- Generated from catalog.yaml + data/products.json by tools/render. Edit the source contracts, then `make render`. -->\n")

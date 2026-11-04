@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 228" width="880" height="228" role="img">
-  <title>Nico Stranquist — Senior software engineer</title>
+  <title>Nicholas (Nico) Stranquist — Senior software engineer</title>
   <rect width="880" height="228" rx="22" fill="#10100f"/>
   <rect x="18" y="18" width="844" height="192" rx="16" fill="none" stroke="rgba(240,238,231,0.16)" stroke-width="1"/>
   <g aria-hidden="true">
@@ -20,9 +20,9 @@
     <rect x="82.0" y="133.0" width="16.0" height="16.0" rx="3.5" fill="rgba(240,238,231,0.08)"/>
     <rect x="103.0" y="133.0" width="16.0" height="16.0" rx="3.5" fill="#5c7cff"/>
   </g>
-  <text x="148" y="94" fill="#f0eee7" font-family="'Iowan Old Style', Palatino, 'Times New Roman', serif" font-size="30" letter-spacing="1.4">NICO STRANQUIST</text>
+  <text x="148" y="94" fill="#f0eee7" font-family="'Iowan Old Style', Palatino, 'Times New Roman', serif" font-size="30" letter-spacing="1.4">NICHOLAS (NICO) STRANQUIST</text>
   <text x="148" y="126" fill="#918f88" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="16">Senior software engineer</text>
-  <text x="148" y="154" fill="#5c7cff" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="0.6">St. Louis  ·  public catalog  ·  tagged releases</text>
+  <text x="148" y="154" fill="#5c7cff" font-family="'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace" font-size="12" letter-spacing="0.6">St. Louis, MO  ·  public catalog  ·  tagged releases</text>
   <rect x="148.0" y="182" width="90.8" height="22" rx="11" fill="#1d1d1b" stroke="rgba(240,238,231,0.16)"/>
   <text x="161.0" y="197" fill="#918f88" font-family="'Avenir Next', 'Segoe UI', system-ui, sans-serif" font-size="11">Platforms</text>
   <rect x="246.8" y="182" width="105.2" height="22" rx="11" fill="#1d1d1b" stroke="rgba(240,238,231,0.16)"/>

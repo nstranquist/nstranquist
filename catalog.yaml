@@ -3,12 +3,14 @@
 # GitHub extracts that do not yet have a Product Passport snapshot.
 schema_version: 2
 identity:
-  name: Nico Stranquist
+  name: Nicholas (Nico) Stranquist
   role: Senior software engineer
-  location: St. Louis
-  thesis: Full-stack products, developer platforms, and AI systems.
+  location: St. Louis, MO
+  thesis: Developer platforms, full-stack products, and AI tools.
   intro: |
-    Senior software engineer. Full-stack products, developer platforms, and AI systems.
+    Senior software engineer in St. Louis, MO. I build developer platforms, full-stack products, and AI tools.
+
+    Open to senior software engineering roles. Career history and resume: [nstranquist.github.io](https://nstranquist.github.io).
   github: https://github.com/nstranquist
   linkedin: https://linkedin.com/in/nstranquist
   site: https://nstranquist.github.io
@@ -36,8 +38,8 @@ extra_products:
     license: Apache-2.0
     language: Go
     lane: host admission
-    proof: v0.1.0
-    proof_url: https://github.com/nstranquist/session-pressure/tree/v0.1.0
+    proof: v0.5.2
+    proof_url: https://github.com/nstranquist/session-pressure/tree/v0.5.2
     summary: Local host admission for concurrent coding agents on one Mac.
   product.keepawake:
     name: keepawake
